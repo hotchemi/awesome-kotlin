@@ -48,6 +48,7 @@ https://github.com/TouK/bubble[TouK/bubble^] - Library for obtaining screen orie
 https://github.com/ragunathjawahar/kaffeine[ragunathjawahar/kaffeine^] - Kaffeine is a Kotlin-flavored Android library for accelerating development.
 https://github.com/mcxiaoke/kotlin-koi[mcxiaoke/kotlin-koi^] - Koi, a lightweight kotlin library for Android Development.
 https://github.com/BennyWang/KBinding[BennyWang/KBinding^] - Android View Model binding framework write in kotlin, base on anko, simple but powerful.
+https://github.com/grandstaish/paperparcel[grandstaish/paperparcel^] - Boilerplate reduction library written specifically for working with Kotlin data classes on Android.
 
 === Web
 https://github.com/Kotlin/ktor[Kotlin/ktor^] - Web backend framework for Kotlin.

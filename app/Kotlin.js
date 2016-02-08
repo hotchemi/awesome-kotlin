@@ -122,6 +122,12 @@ const data = [{
             href: 'https://github.com/BennyWang/KBinding',
             type: 'github',
             tags: ['android', 'bindings']
+        }, {
+            name: 'grandstaish/paperparcel',
+            desc: 'Boilerplate reduction library written specifically for working with Kotlin data classes on Android.',
+            href: 'https://github.com/grandstaish/paperparcel',
+            type: 'github',
+            tags: ['android', 'annotation processing']
         }]
     }, {
         name: "Web",
