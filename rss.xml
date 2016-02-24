@@ -12,9 +12,9 @@
             <link>https://javaby.github.io/awesome-kotlin/</link>
         </image>
         <generator>node-rss</generator>
-        <lastBuildDate>Wed, 24 Feb 2016 10:38:30 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 24 Feb 2016 13:20:28 GMT</lastBuildDate>
         <atom:link href="https://javaby.github.io/awesome-kotlin/rss.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 24 Feb 2016 10:38:30 GMT</pubDate>
+        <pubDate>Wed, 24 Feb 2016 13:20:28 GMT</pubDate>
         <copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright>
         <language><![CDATA[en]]></language>
         <managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor>
@@ -24,5 +24,17 @@
         <category><![CDATA[Kotlin]]></category>
         <category><![CDATA[Programming]]></category>
         <category><![CDATA[JVM]]></category>
+        <item>
+            <title><![CDATA[[RU] Kotlin 1.0. Задай вопрос команде.]]></title>
+            <description><![CDATA[На этой неделе случилось важное для нас событие — вышла первая версия языка программирования Kotlin!
+    Так как почти вся разработка Kotlin велась в Питерском офисе компании JetBrains, многие хабровчане уже знают, 
+    что такое Kotlin и пробовали его на практике, поэтому этот пост больше для комментариев: задавайте любые вопросы и команда Kotlin ответит. Мы онлайн!]]></description>
+            <link>https://habrahabr.ru/company/JetBrains/blog/277573/</link>
+            <guid isPermaLink="true">https://habrahabr.ru/company/JetBrains/blog/277573/</guid>
+            <category><![CDATA[JetBrains]]></category>
+            <category><![CDATA[Kotlin]]></category>
+            <dc:creator><![CDATA[Роман Белов]]></dc:creator>
+            <pubDate>Thu, 18 Feb 2016 21:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
