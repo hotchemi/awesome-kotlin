@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Kotlin Programming Language.]]></title>
+        <description>
+            <![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description>
+        <link>https://javaby.github.io/awesome-kotlin/</link>
+        <image>
+            <url>https://javaby.github.io/awesome-kotlin/favicon.ico</url>
+            <title>Kotlin Programming Language.</title>
+            <link>https://javaby.github.io/awesome-kotlin/</link>
+        </image>
+        <generator>node-rss</generator>
+        <lastBuildDate>Wed, 24 Feb 2016 10:38:30 GMT</lastBuildDate>
+        <atom:link href="https://javaby.github.io/awesome-kotlin/rss.xml" rel="self" type="application/rss+xml"/>
+        <pubDate>Wed, 24 Feb 2016 10:38:30 GMT</pubDate>
+        <copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright>
+        <language><![CDATA[en]]></language>
+        <managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor>
+        <webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <ttl>30</ttl>
+        <category><![CDATA[Kotlin]]></category>
+        <category><![CDATA[Programming]]></category>
+        <category><![CDATA[JVM]]></category>
+    </channel>
+</rss>
