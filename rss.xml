@@ -1,40 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
-     xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title><![CDATA[Kotlin Programming Language.]]></title>
-        <description>
-            <![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description>
-        <link>https://javaby.github.io/awesome-kotlin/</link>
-        <image>
-            <url>https://javaby.github.io/awesome-kotlin/favicon.ico</url>
-            <title>Kotlin Programming Language.</title>
-            <link>https://javaby.github.io/awesome-kotlin/</link>
-        </image>
-        <generator>node-rss</generator>
-        <lastBuildDate>Wed, 24 Feb 2016 13:20:28 GMT</lastBuildDate>
-        <atom:link href="https://javaby.github.io/awesome-kotlin/rss.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Wed, 24 Feb 2016 13:20:28 GMT</pubDate>
-        <copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright>
-        <language><![CDATA[en]]></language>
-        <managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor>
-        <webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster>
-        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-        <ttl>30</ttl>
-        <category><![CDATA[Kotlin]]></category>
-        <category><![CDATA[Programming]]></category>
-        <category><![CDATA[JVM]]></category>
-        <item>
-            <title><![CDATA[[RU] Kotlin 1.0. Задай вопрос команде.]]></title>
-            <description><![CDATA[На этой неделе случилось важное для нас событие — вышла первая версия языка программирования Kotlin!
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language.]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>https://javaby.github.io/awesome-kotlin/</link><image><url>https://javaby.github.io/awesome-kotlin/favicon.ico</url><title>Kotlin Programming Language.</title><link>https://javaby.github.io/awesome-kotlin/</link></image><generator>node-rss</generator><lastBuildDate>Wed, 24 Feb 2016 14:37:19 GMT</lastBuildDate><atom:link href="https://javaby.github.io/awesome-kotlin/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 24 Feb 2016 14:37:19 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[[RU] Podcast Разбор Полетов: Episode 102 — Kotlin, тесты и здоровый сон.]]></title><description><![CDATA[Kotlin 1.0 RC - Философия Kotlin.]]></description><link>http://razbor-poletov.com/2016/02/episode-102.html</link><guid isPermaLink="true">http://razbor-poletov.com/2016/02/episode-102.html</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Podcast]]></category><dc:creator><![CDATA[Dmitry Jemerov, Viktor Gamov, Alexey Abashev, Anton Arphipov,  Dmitry Churbanov, Anton Arhipov]]></dc:creator><pubDate>Thu, 04 Feb 2016 18:54:00 GMT</pubDate><enclosure url="http://traffic.libsyn.com/razborpoletov/razbor_102.mp3" length="70319173" type="audio/mpeg"/></item><item><title><![CDATA[Kotlin 1.0 Released: Pragmatic Language for JVM and Android]]></title><description><![CDATA[This is it. 1.0 is here! It’s been a long and exciting road but we’ve finally reached the first big 1.0, and we’re celebrating the release by also presenting you with the new logo.]]></description><link>http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/</link><guid isPermaLink="true">http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/</guid><category><![CDATA[JetBrains]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Andrey Breslav]]></dc:creator><pubDate>Mon, 15 Feb 2016 09:57:00 GMT</pubDate><enclosure url="http://i0.wp.com/blog.jetbrains.com/kotlin/files/2016/02/1_0_Banner.png" length="0" type="image/png"/></item><item><title><![CDATA[[RU] Kotlin 1.0. Задай вопрос команде.]]></title><description><![CDATA[На этой неделе случилось важное для нас событие — вышла первая версия языка программирования Kotlin! 
     Так как почти вся разработка Kotlin велась в Питерском офисе компании JetBrains, многие хабровчане уже знают, 
-    что такое Kotlin и пробовали его на практике, поэтому этот пост больше для комментариев: задавайте любые вопросы и команда Kotlin ответит. Мы онлайн!]]></description>
-            <link>https://habrahabr.ru/company/JetBrains/blog/277573/</link>
-            <guid isPermaLink="true">https://habrahabr.ru/company/JetBrains/blog/277573/</guid>
-            <category><![CDATA[JetBrains]]></category>
-            <category><![CDATA[Kotlin]]></category>
-            <dc:creator><![CDATA[Роман Белов]]></dc:creator>
-            <pubDate>Thu, 18 Feb 2016 21:00:00 GMT</pubDate>
-        </item>
-    </channel>
-</rss>
+    что такое Kotlin и пробовали его на практике, поэтому этот пост больше для комментариев: задавайте любые вопросы и команда Kotlin ответит. Мы онлайн!]]></description><link>https://habrahabr.ru/company/JetBrains/blog/277573/</link><guid isPermaLink="true">https://habrahabr.ru/company/JetBrains/blog/277573/</guid><category><![CDATA[JetBrains]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Роман Белов]]></dc:creator><pubDate>Fri, 19 Feb 2016 13:30:00 GMT</pubDate></item><item><title><![CDATA[A Very Peculiar, but Possibly Cunning Kotlin Language Feature.]]></title><description><![CDATA[This has caught me by surprise. 
+    After studying the Kotlin language to learn about how to best leverage this interesting new language for jOOQ, I stumbled upon this puzzler. 
+    What do you think the following program will print? fun main(args: Array) { (1..5).forEach { if (it == 3) return print(it) } print("done") } Well... You...]]></description><link>http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</link><guid isPermaLink="true">http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Puzzlers]]></category><dc:creator><![CDATA[Lukas Eder]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:33:00 GMT</pubDate></item></channel></rss>
