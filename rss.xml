@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Sat, 05 Mar 2016 09:39:41 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 05 Mar 2016 09:39:40 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[[RU] Видео со встречи JUG.ru с разработчиками Kotlin]]></title><description><![CDATA[<h2>&#x427;&#x430;&#x441;&#x442;&#x44C; 1. &#x412;&#x432;&#x435;&#x434;&#x435;&#x43D;&#x438;&#x435;</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Sun, 06 Mar 2016 07:18:13 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 06 Mar 2016 07:18:13 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[Kotlin Month Post 2: Inheritance and Defaults]]></title><description><![CDATA[<h2>Intro</h2>
+<p>Continuing on with <a href="https://programmingideaswithjake.wordpress.com/kotlin/#kotlinmonth">Kotlin Month</a>, this week, I&rsquo;ll be discussing topics in Kotlin that have to do with inheritance and default values.</p>
+<h2>Composition Over Inheritance</h2>
+<p>Kotlin has put in a feature and a couple defaults that help developers keep the principle of Composition Over Inheritance at the forefront of their mind. The first of these is a feature that lets you composition almost as easily as inheritance when it comes to defining wrapper classes.</p>
+<h2>First-Class Delegation</h2>
+<p>Kotlin provides first-class access to delegation with very little help from you, the developer. All that needs to be done is:</p>
+<ol>
+<li>The new class inherits from an interface</li>
+<li>The new class provides a primary constructor that defines a property that inherits from the same interface</li>
+<li>After declaring the inheritance of the interface, include &ldquo;by &lt;name of property&gt;&rdquo;</li>
+</ol>
+<p>For example:</p>
+<pre><code class="hljs language-kotlin">interface A {
+   <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSomething</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Unit</span></span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> a</span>: A) : A by a</code></pre>
+<p>In this example, we have interface <code>A</code>, which has a <code>doSomething()</code> method to be implemented. Class <code>B</code> is our delegator class. It inherits from <code>A</code>, includes a primary constructor with a property called <code>a</code> that inherits from <code>A</code> (<code>(val a: A)</code>), and says to delegate to <code>a</code> with <code>A by a</code>.</p>
+<p>Now <code>B</code> doesn&rsquo;t need to explicitly implement any of the methods from <code>A</code> because they&rsquo;re implicitly provided via delegation, just like it would with normal inheritance if <code>B</code> was inheriting from a fully implemented class. In this case, instead of just pointing to its parent class implementation, it gets a default implementation as if <code>B</code> had been defined like this:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> a</span>: A) A {
+   <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSomething</span><span class="hljs-params">()</span> {</span>
+      a.doSomething()
+   }
+}</code></pre>
+<p>The delegation can be done for multiple interfaces at a time, too.</p>
+<p>I created a <a href="https://programmingideaswithjake.wordpress.com/2015/05/23/python-decorator-for-simplifying-delegate-pattern/">class decorator in Python</a> that did something like this a while back, since I liked this idea so much.</p>
+<p>Kotlin practically needed something like this in the language to go along with a certain set of defaults...</p>
+<h2>Final By Default</h2>
+<p>Classes and public methods are <code>final</code> by default in Kotlin, meaning they can not be inherited from or overridden, respectively. In order to make those options available, classes and methods must be marked as <code>open</code>.</p>
+<p>This goes along with item 17 in Effective Java, namely &ldquo;Design and document for inheritance or else prohibit it&rdquo;, just as this entire item lines up with item 16 in Effective Java, &ldquo;Favor Composition Over Inheritance&rdquo;.</p>
+<p>These two pieces work together quite nicely and will hopefully mean that code written in Kotlin will be of better quality because of it.</p>
+<p>Many people are against the decision of final by default, but they largely seem to not realize that C# has had the same thing all along (without first-class delegation, I might add), and I haven&rsquo;t heard any complaints from their side. I would venture to guess that most of the people that argue this point also don&rsquo;t have a mindset of preferring composition. Obviously, there are some cases where this may backfire (especially if a library doesn&rsquo;t provide an interface for a certain class you want to extend), but this should hopefully prevent more problems than it makes.</p>
+<h2>Visibility Modifier Defaults</h2>
+<p>What is the most commonly typed word in all of Java? I would venture to guess that it&rsquo;s <code>public</code>, with <code>return</code> and <code>import</code> in a close second place. For the most part, that <code>public</code> keyword is clutter; most things are public, and it should probably be the default. Kotlin decided to do just that, making the code cleaner.</p>
+<p>Now, this does go against the general advice for encapsulation for making members of a class as private as possible, but even when this advice is followed pretty well, <code>public</code> is still the most common visibility modifier. So, thankfully, <code>public</code> is the default in Kotlin.</p>
+<h2>Sealed Classes</h2>
+<p>Sealed Classes are a more interesting than useful feature, in my opinion. They provide a way to lock in a hierarchy so that the only subclasses of the sealed class are those defined within its borders. This is really handy for the split-type monads (such as Either and Maybe/Optional) and, judging by the example used in the documents, expression trees.</p>
+<p>Again, Kotlin has an additional feature that plays well with this feature, and that&rsquo;s the when expression, which is a reimagined <code>switch</code>. The <code>when</code> expression is made aware by the compiler to know whether all of the subclasses are presented so that it doesn&rsquo;t force you to needlessly provide a default <code>else</code> clause.</p>
+<p>Again, I find this feature more interesting than useful, especially since I worked out a (slightly more painful) way to largely recreate the same thing in Java (with an additional idea or two running through my head). If you&rsquo;re curious how I do it, leave a comment letting me know, and I&rsquo;ll do a post about it.</p>
+<h1>Extension Methods</h1>
+<p>Extension methods are methods that you can &ldquo;add onto a class&rdquo; after the fact. I use quotes because they&rsquo;re not actually added to the class (at least not in Kotlin); rather, they are a static methods that can be used as if they&rsquo;re methods on an instance, allowing you to import those methods to be used only in certain instances and to discover them with autocompletion. But mostly it&rsquo;s a syntax that makes static methods look less stupid.</p>
+<p>Why are these not more of a thing in the programming world? All those <code>String</code> and <code>Date</code> utility classes would be so much easier to use if they could be used as extensions to the actual class. Other than C#, I don&rsquo;t know of any other languages that do this (understandably, dynamic languages don&rsquo;t actually need anything special for this feature, since you can literally add any method to a class any time you want). If you know of any, I&rsquo;d appreciate it if you listed them in the comments.</p>
+<p>Another awesome thing about extension methods is how Kotlin combines them with lambdas to make extension lambdas, which make certain things like <a href="https://kotlinlang.org/docs/reference/type-safe-builders.html">their</a> <a href="https://programmingideaswithjake.wordpress.com/2016/01/16/mimicking-kotlin-builders-in-java-and-python/">type-safe</a> <a href="https://programmingideaswithjake.wordpress.com/2016/01/23/kotlin-like-builders-in-java-and-python-continued-additional-parameters/">builders</a> so much cleaner.</p>
+<h2>Outro</h2>
+<p>That&rsquo;s the end of <em>this</em> article. Tune in next week for the third post of <a href="https://programmingideaswithjake.wordpress.com/kotlin/#kotlinmonth">Kotlin Month!</a> That one will go over the safety features that Kotlin has, such as null safety and improved generics.</p>
+]]></description><link>https://programmingideaswithjake.wordpress.com/2016/03/05/kotlin-month-post-2-inheritance-and-defaults/</link><guid isPermaLink="true">https://programmingideaswithjake.wordpress.com/2016/03/05/kotlin-month-post-2-inheritance-and-defaults/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jacob Zimmerman]]></dc:creator><pubDate>Sat, 05 Mar 2016 03:00:00 GMT</pubDate></item><item><title><![CDATA[[RU] Видео со встречи JUG.ru с разработчиками Kotlin]]></title><description><![CDATA[<h2>&#x427;&#x430;&#x441;&#x442;&#x44C; 1. &#x412;&#x432;&#x435;&#x434;&#x435;&#x43D;&#x438;&#x435;</h2>
 <p>&#x410;&#x43D;&#x434;&#x440;&#x435;&#x439; &#x411;&#x440;&#x435;&#x441;&#x43B;&#x430;&#x432; &#x440;&#x430;&#x441;&#x441;&#x43A;&#x430;&#x436;&#x435;&#x442; &#x43F;&#x440;&#x43E; &#x442;&#x43E;, &#x447;&#x442;&#x43E; &#x442;&#x430;&#x43A;&#x43E;&#x435; Kotlin, &#x43A;&#x430;&#x43A; &#x443; &#x43D;&#x435;&#x433;&#x43E; &#x441;&#x435;&#x439;&#x447;&#x430;&#x441; &#x434;&#x435;&#x43B;&#x430; &#x438; &#x442;.&#x434;.
 <a href="https://www.youtube.com/watch?v=HWyd1gYMkl0">&#x410;&#x43D;&#x434;&#x440;&#x435;&#x439; &#x411;&#x440;&#x435;&#x441;&#x43B;&#x430;&#x432; &mdash; &#x427;&#x442;&#x43E; &#x442;&#x430;&#x43A;&#x43E;&#x435; Kotlin &#x412;&#x432;&#x435;&#x434;&#x435;&#x43D;&#x438;&#x435;</a></p>
 <h2>&#x427;&#x430;&#x441;&#x442;&#x44C; 2. &#x41A; &#x440;&#x435;&#x43B;&#x438;&#x437;&#x443; &#x438; &#x434;&#x430;&#x43B;&#x435;&#x435;</h2>
@@ -10,7 +55,230 @@
 <h2>&#x427;&#x430;&#x441;&#x442;&#x44C; 4. &#x421;&#x435;&#x441;&#x441;&#x438;&#x44F; &#x432;&#x43E;&#x43F;&#x440;&#x43E;&#x441;&#x43E;&#x432; &#x438; &#x43E;&#x442;&#x432;&#x435;&#x442;&#x43E;&#x432;</h2>
 <p><a href="https://www.youtube.com/watch?v=YOmdOTlhZa8">&#x410;&#x43D;&#x434;&#x440;&#x435;&#x439; &#x411;&#x440;&#x435;&#x441;&#x43B;&#x430;&#x432; &#x438; &#x414;&#x43C;&#x438;&#x442;&#x440;&#x438;&#x439; &#x416;&#x435;&#x43C;&#x435;&#x440;&#x43E;&#x432; &mdash; Kotlin - &#x441;&#x435;&#x441;&#x441;&#x438;&#x44F; &#x432;&#x43E;&#x43F;&#x440;&#x43E;&#x441;&#x43E;&#x432; &#x438; &#x43E;&#x442;&#x432;&#x435;&#x442;&#x43E;&#x432;</a>
 &#x410;&#x43D;&#x434;&#x440;&#x435;&#x439;, &#x414;&#x43C;&#x438;&#x442;&#x440;&#x438;&#x439; &#x438; &#x434;&#x440;&#x443;&#x433;&#x438;&#x435; &#x440;&#x430;&#x437;&#x440;&#x430;&#x431;&#x43E;&#x442;&#x447;&#x438;&#x43A;&#x438; Kotlin &#x441; &#x443;&#x434;&#x43E;&#x432;&#x43E;&#x43B;&#x44C;&#x441;&#x442;&#x432;&#x438;&#x435;&#x43C; &#x43E;&#x442;&#x432;&#x435;&#x442;&#x44F;&#x442; &#x43D;&#x430; &#x432;&#x430;&#x448;&#x438; &#x432;&#x43E;&#x43F;&#x440;&#x43E;&#x441;&#x44B;.</p>
-]]></description><link>https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</link><guid isPermaLink="true">https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Video]]></category><dc:creator><![CDATA[JetBrains]]></dc:creator><pubDate>Fri, 04 Mar 2016 14:12:00 GMT</pubDate></item><item><title><![CDATA[Kotlin для начинающих]]></title><description><![CDATA[<p>&#x423;&#x436;&#x435; &#x43D;&#x435; &#x43C;&#x430;&#x43B;&#x43E; &#x43D;&#x430;&#x448;&#x443;&#x43C;&#x435;&#x43B; Kotlin &#x432; &#x43C;&#x438;&#x440;&#x435; &#x43F;&#x440;&#x43E;&#x433;&#x440;&#x430;&#x43C;&#x43C;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x438;&#x44F;, &#x43D;&#x435; &#x43C;&#x430;&#x43B;&#x43E; &#x43F;&#x440;&#x43E;&#x444;&#x435;&#x441;&#x441;&#x438;&#x43E;&#x43D;&#x430;&#x43B;&#x44C;&#x43D;&#x44B;&#x445; &#x438;&#x43D;&#x436;&#x435;&#x43D;&#x435;&#x440;&#x43E;&#x432; &#x443;&#x436;&#x435; &#x43E;&#x431;&#x440;&#x430;&#x442;&#x438;&#x43B; &#x43D;&#x430; &#x43D;&#x435;&#x433;&#x43E; &#x432;&#x43D;&#x438;&#x43C;&#x430;&#x43D;&#x438;&#x435;, &#x43D;&#x43E; &#x442;&#x430;&#x43A;&#x436;&#x435; &#x435;&#x441;&#x442;&#x44C; &#x438; &#x442;&#x435; &#x43A;&#x43E;&#x43C;&#x443; &#x43E;&#x43D; &#x43D;&#x435; &#x441;&#x438;&#x43C;&#x43F;&#x430;&#x442;&#x438;&#x437;&#x438;&#x440;&#x443;&#x435;&#x442;.</p>
+]]></description><link>https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</link><guid isPermaLink="true">https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Video]]></category><dc:creator><![CDATA[JetBrains]]></dc:creator><pubDate>Fri, 04 Mar 2016 14:12:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: a new JVM language you should try]]></title><description><![CDATA[<h2>Kotlin 1.0 is here</h2>
+<p><a href="https://www.jetbrains.com/">JetBrains</a> (the people behind IntelliJ IDEA) have <a href="http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/">recently announced</a> the first RC for version 1.0 of <a href="https://kotlinlang.org/">Kotlin</a>, a new programming language for the JVM. I say &lsquo;new&rsquo;, but Kotlin has been in the making for a few years now, and has been used by JetBrains to develop several of their products, including Intellij IDEA. The company <a href="https://github.com/JetBrains/kotlin">open-sourced</a> Kotlin in 2011, and have worked with the community since then to make the language what it is today.</p>
+<p><img src="https://opencredo.com/wp-content/uploads/2016/02/kronshtadt.jpg" alt="Kotlin"></p>
+<h2>What is Kotlin and why you should care</h2>
+<p>There is no shortage of <a href="https://en.wikipedia.org/wiki/List_of_JVM_languages">JVM languages</a> to choose from these days. Kotlin (named after <a href="https://en.wikipedia.org/wiki/Kotlin_Island">Kotlin island</a>, near St. Petersburg, pictured above) positions itself as a pragmatic and easy-to-use alternative to Java, with which it is highly interoperable, to the point where you can mix Kotlin and Java code in the single codebase. The emphasis on interoperability lowers the adoption barrier, which can make Kotlin rather appealing to any Java developer who wished Java was more expressive and less verbose. Kotlin compiles to Java 6-compatible bytecode so you can use the powerful features it offers on older JVM versions (or Android where it has become quite popular already).</p>
+<h2>Hello World! with Kotlin</h2>
+<p>Let&rsquo;s see some code and compare it with Java and Scala (from which Kotlin has borrowed quite a few language constructs) to get a first impression about the language and highlight a few differences compared to the alternatives.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-comment">// Kotlin</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array&lt;String&gt;</span>)</span> {</span>
+    println(<span class="hljs-string">"Hello, World!"</span>)
+}</code></pre>
+<pre><code class="hljs language-scala"><span class="hljs-comment">// Scala</span>
+<span class="hljs-class"><span class="hljs-keyword">object</span> <span class="hljs-title">App</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span></span>(args: <span class="hljs-type">Array</span>[<span class="hljs-type">String</span>]) {
+    println(<span class="hljs-string">"Hello, world!"</span>)
+  }
+}</code></pre>
+<pre><code class="hljs language-java"><span class="hljs-comment">// Java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        System.out.println(<span class="hljs-string">"Hello, World!"</span>);
+    }
+}</code></pre>
+<p>You can observe almost immediately how compact Kotlin&rsquo;s version is (even compared to Scala). Kotlin benefits from top-level (or package-level) functions that are not members of a class or object, which is perfect for the <code>main</code> function. Since package declaration is omitted the function belongs to the default package.</p>
+<p>There are a few language features shown above that make Kotlin programs somewhat similar to Scala ones:</p>
+<ul>
+<li>Type declarations are defined after function argument names, variable names or function/method names</li>
+<li>the <code>Unit</code> return type (equivalent to Java void) is optional</li>
+<li><code>Array</code> is a regular generic type</li>
+<li>The <code>println()</code> function, and other print functions, are available implicitly</li>
+<li>semicolons are optional :)</li>
+</ul>
+<h2>Type system</h2>
+<p>Kotlin&rsquo;s type system is close enough to Java&rsquo;s to provide a good level of interoperability, although it still empowers developers to produce elegant code in a productive way; for instance, type inference removes the need to declare variable types everywhere. A lot of features in Kotlin have been influenced by the <a href="http://www.oracle.com/technetwork/java/effectivejava-136174.html">Effective Java</a> series, and try to tackle some of the not-so-great elements that Java has inherited from its early days. Kotlin makes it easier to follow best practice, and prevents some of the more questionable practices completely.</p>
+<p>The key features of Kotlin&rsquo;s type system (compared to Java) are:</p>
+<ul>
+<li>every class inherits from type <code>Any</code>, which defines only 3 functions (<code>equals()</code>, <code>hashCode()</code> and <code>toString()</code>), compared to quite a few more in Java&rsquo;s <code>Object</code></li>
+<li>all <a href="https://kotlinlang.org/docs/reference/basic-types.html">data types</a> are represented by classes, including numbers (<code>Int</code>, <code>Long</code>, <code>Double</code>, etc.), characters (<code>Char</code>) and booleans (<code>Boolean</code>)</li>
+<li>
+<p>a class&rsquo;s primary <a href="https://kotlinlang.org/docs/reference/classes.html#constructors">constructor</a> can be defined as part of the class declaration</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> bar</span>: String, <span class="hljs-variable"><span class="hljs-keyword">val</span> baz</span>: <span class="hljs-keyword">Int</span>)</code></pre>
+</li>
+<li>
+<p>the <code>new</code> keyword is missing</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> foo</span> = Foo(<span class="hljs-string">"bar"</span>, <span class="hljs-number">42</span>)</code></pre>
+</li>
+<li>there are no static methods and any static code needs to be defined in a <a href="https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects">class companion object</a></li>
+<li>classes and functions are final by default and have to be declared <code>open</code> to be overridable</li>
+<li>any type can be enhanced by using <a href="https://kotlinlang.org/docs/reference/extensions.html">extension functions</a> to define additional functions/methods (no more <code>xUtils</code> classes)</li>
+<li><a href="https://kotlinlang.org/docs/reference/generics.html">generics</a> have been revamped to make working with variance much easier</li>
+<li><a href="https://kotlinlang.org/docs/reference/object-declarations.html">objects</a> can be used to implement the singleton pattern or to avoid the need for anonymous inner classes</li>
+<li>
+<p><a href="https://kotlinlang.org/docs/reference/data-classes.html">data classes</a> make it trivial to create Java Bean-style data containers</p>
+<pre><code class="hljs language-kotlin">data <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> firstName</span>: String, <span class="hljs-variable"><span class="hljs-keyword">val</span> lastName</span>: String)</code></pre>
+</li>
+</ul>
+<h2>Functional programming</h2>
+<p>Kotlin is not a functional language but provides decent support for FP elements where they make sense in the OO world. It lifts functions to first-class-citizen status and makes using them very easy (the same sadly can&rsquo;t be said about Java, even in version 8). Kotlin supports <a href="https://kotlinlang.org/docs/reference/lambdas.html#higher-order-functions">higher-order functions</a> which means that functions can be passed in as arguments to other functions or returned from functions.</p>
+<pre><code class="hljs language-kotln">// List.map() is an example of a higher-order function
+fun  List.map(transform: (T) -&gt; R): List {
+  val result = arrayListOf()
+  for (item in this)
+    result.add(transform(item))
+  return result
+}</code></pre>
+<p>Additionally, <a href="https://kotlinlang.org/docs/reference/lambdas.html#lambda-expression-syntax">lambda expressions</a> and <a href="https://kotlinlang.org/docs/reference/lambdas.html#anonymous-functions">anonymous functions</a> can be used when function expressions or references are expected.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> doubled</span> = ints.map { it -&gt; it * <span class="hljs-number">2</span> }</code></pre>
+<p>Some other nice features around working with <a href="https://kotlinlang.org/docs/reference/functions.html#functions">functions</a> in Kotlin include:</p>
+<ul>
+<li>
+<p>default argument values</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">read</span><span class="hljs-params">(b: <span class="hljs-type">Array, off: Int</span> = 0, len: <span class="hljs-type">Int</span> = b.size()</span>) {...}</span></code></pre>
+</li>
+<li>
+<p>named arguments</p>
+<pre><code class="hljs language-kotlin">read(bytes, len = 100)</code></pre>
+</li>
+<li>
+<p>infix notation</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> plusOne</span> = value + <span class="hljs-number">1</span> <span class="hljs-comment">// plus operator is a function call using infix notation</span></code></pre>
+</li>
+<li>
+<p>Unit return is optional</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">printMe</span><span class="hljs-params">(message: <span class="hljs-type">String</span>)</span>: <span class="hljs-keyword">Unit</span> { <span class="hljs-title">println</span><span class="hljs-params">(message)</span> }</span></code></pre>
+</li>
+<li>
+<p>single-expression functions</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">printMe</span><span class="hljs-params">(message: <span class="hljs-type">String</span>)</span>: <span class="hljs-keyword">Unit</span> = <span class="hljs-title">println</span><span class="hljs-params">(message)</span></span></code></pre>
+</li>
+<li>
+<p>tail-recursive functions</p>
+<pre><code class="hljs language-kotlin">tailrec <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">findFixPoint</span><span class="hljs-params">(x: <span class="hljs-type">Double</span> = 1.0)</span>: <span class="hljs-keyword">Double</span> = <span class="hljs-title">if</span> <span class="hljs-params">(x == Math.cos(x)</span>) x <span class="hljs-keyword">else</span> <span class="hljs-title">findFixPoint</span><span class="hljs-params">(Math.cos(x)</span>)</span></code></pre>
+</li>
+</ul>
+<h2>Null safety</h2>
+<p>Handling null references has been quite a chore in Java from the very beginning. In recent versions of the language a few utility classes have been added to make it somewhat more manageable (<code>Objects</code> in Java 7 and Optional in Java 8 come to mind), but the language itself doesn&rsquo;t provide much-needed native support. Kotlin is different as it adopts and further enhances Groovy&rsquo;s approach to <a href="https://kotlinlang.org/docs/reference/null-safety.html">null-safety</a> and makes working with object references less of a hassle.</p>
+<p>By default, the compiler will prevent assigning null value to an object reference and you have to explicitly declare a variable as nullable.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">var</span> a</span>: String = <span class="hljs-string">"abc"</span>
+a = <span class="hljs-literal">null</span> <span class="hljs-comment">// compilation error</span>
+
+<span class="hljs-variable"><span class="hljs-keyword">var</span> b</span>: String? = <span class="hljs-string">"abc"</span> <span class="hljs-comment">// '?' declares variable as nullable</span>
+b = <span class="hljs-literal">null</span> <span class="hljs-comment">// ok</span></code></pre>
+<p>With that initial safety feature in place you can then safely follow nullable object references without worrying about <code>NullPointerException</code> (or employing an excessive degree of null-checking). Additionally, the so-called Elvis operator (surely you can see Elvis&rsquo; hair do in <code>?:</code>) provides a syntactic sugar for defining a default value if a null reference has been encountered.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> departmentHead</span> = employee?.department?.head?.name ?: <span class="hljs-string">"n/a"</span></code></pre>
+<p>On top of that, Kotlin offers safe-casting support, where instead of throwing ClassCastException the expression returns a null value.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> aInt</span>: <span class="hljs-keyword">Int</span>? = a <span class="hljs-keyword">as</span>? <span class="hljs-keyword">Int</span></code></pre>
+<h2>Collections</h2>
+<p>Unlike Scala, Kotlin doesn&rsquo;t provide its own collection framework built from ground up. The rationale behind that choice is Java interoperability. Collections are the bread and butter of software engineering and the team behind Kotlin decided they didn&rsquo;t want to make it difficult to use Java collections from Kotlin, or to make developers to learn new collection types. <a href="https://kotlinlang.org/docs/reference/collections.html">Collections in Kotlin</a> reflect those in Java with one difference &ndash; Kotlin distinguishes between immutable and mutable collections, favouring immutability (although mutable Java collections are being used behind the scenes).</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> numbers</span>: MutableList = mutableListOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<span class="hljs-variable"><span class="hljs-keyword">val</span> readOnlyView</span>: List = numbers
+println(numbers)        <span class="hljs-comment">// prints "[1, 2, 3]"</span>
+numbers.add(<span class="hljs-number">4</span>)
+println(readOnlyView)   <span class="hljs-comment">// prints "[1, 2, 3, 4]"</span>
+readOnlyView.clear()    <span class="hljs-comment">// -&gt; does not compile</span>
+
+<span class="hljs-variable"><span class="hljs-keyword">val</span> strings</span> = hashSetOf(<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>, <span class="hljs-string">"c"</span>, <span class="hljs-string">"c"</span>)
+assert(strings.size == <span class="hljs-number">3</span>)</code></pre>
+<p>Additionally, the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/index.html">collection API in Kotlin</a> offers a range of easy-to-use extension functions around collection types.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> items</span> = listOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)
+items.first() == <span class="hljs-number">1</span>
+items.last() == <span class="hljs-number">4</span>
+items.filter { it % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> }   <span class="hljs-comment">// returns [2, 4]</span>
+items.filter { it % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> } take <span class="hljs-number">1</span> forEach { println(it) } <span class="hljs-comment">// prints out 2</span>
+items.fold(<span class="hljs-number">0</span>) { total, current -&gt; total + current } <span class="hljs-comment">// returns 10</span></code></pre>
+<p>Creating and using maps is quite convenient too.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> readWriteMap</span> = hashMapOf(<span class="hljs-string">"foo"</span> to <span class="hljs-number">1</span>, <span class="hljs-string">"bar"</span> to <span class="hljs-number">2</span>)
+println(readWriteMap[<span class="hljs-string">"foo"</span>])
+<span class="hljs-variable"><span class="hljs-keyword">val</span> readOnlyView</span>: Map = HashMap(readWriteMap)
+<span class="hljs-variable"><span class="hljs-keyword">val</span> doubled</span> = readOnlyView.mapValues { entry -&gt; entry.value * <span class="hljs-number">2</span> }
+<span class="hljs-keyword">for</span> ((key, value) <span class="hljs-keyword">in</span> doubled) println(<span class="hljs-string">"$key -&gt; $value"</span>)</code></pre>
+<h2>Control flow</h2>
+<p>Kotlin offers some improved <a href="https://kotlinlang.org/docs/reference/control-flow.html">control flow constructs</a>, certainly compared with Java. So for instance, the <code>if ... else</code> block is an expression (returns a value).</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> max</span> = <span class="hljs-keyword">if</span> (a &gt; b) a <span class="hljs-keyword">else</span> b</code></pre>
+<p>The <code>switch</code> operator (as found in C and Java) has been replaced by <code>when</code> expression form, similar to pattern-matching in Scala, that also makes a convenient replacement for <code>if ... else</code> chains.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">when</span> {
+  x.isOdd() -&gt; print(<span class="hljs-string">"x is odd"</span>)
+  x.isEven() -&gt; print(<span class="hljs-string">"x is even"</span>)
+  <span class="hljs-keyword">else</span> -&gt; print(<span class="hljs-string">"x is funny"</span>)
+}</code></pre>
+<p>The <code>when</code> expression supports <a href="https://kotlinlang.org/docs/reference/typecasts.html#smart-casts">smart-casts</a> too, when combined with matching on the type of the when argument.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> hasPrefix</span> = <span class="hljs-keyword">when</span>(x) {
+  <span class="hljs-keyword">is</span> String -&gt; x.startsWith(<span class="hljs-string">"prefix"</span>) <span class="hljs-comment">// x is automatically casted to String</span>
+  <span class="hljs-keyword">else</span> -&gt; <span class="hljs-literal">false</span>
+}</code></pre>
+<p>A <code>for</code> loop can iterate over any type that provides an iterator implementing <code>next()</code> and <code>hasNext()</code>.</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">for</span> (item <span class="hljs-keyword">in</span> collection)
+  print(item)
+
+<span class="hljs-keyword">for</span> ((index, value) <span class="hljs-keyword">in</span> array.withIndex()) {
+    println(<span class="hljs-string">"the element at $index is $value"</span>)
+}</code></pre>
+<h2>Other features</h2>
+<p>I think we&rsquo;ve covered quite a lot already, but there are still a few more features worth highlighting to round up the language overview:</p>
+<ul>
+<li><a href="https://kotlinlang.org/docs/reference/basic-types.html#string-templates">string templates</a> (known in Scala as string interpolation) make it easy to format string messages easily by resolving variables and expressions</li>
+</ul>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> s</span> = <span class="hljs-string">"abc"</span>
+<span class="hljs-variable"><span class="hljs-keyword">val</span> str</span> = <span class="hljs-string">"$s.length is ${s.length}"</span> <span class="hljs-comment">// evaluates to "abc.length is 3"</span></code></pre>
+<ul>
+<li>
+<p><a href="https://kotlinlang.org/docs/reference/multi-declarations.html">destructuring</a> allows convenient extraction of data class or collection elements</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> person</span> = Person(<span class="hljs-string">"Rafal"</span>, <span class="hljs-number">22</span>) <span class="hljs-comment">// I wish I was 22 again!</span>
+<span class="hljs-variable"><span class="hljs-keyword">val</span> (name, age)</span> = person</code></pre>
+</li>
+</ul>
+<p>for ((key, value) in map) {
+// Map.Entry can be destructured too
+}</p>
+<pre><code>* [type checks](https://kotlinlang.org/docs/reference/typecasts.html) support smart-casting
+&#x60;&#x60;&#x60;koltin
+if (x is String) {
+   print(x.length) // x is automatically cast to String
+}
+</code></pre>
+<ul>
+<li><a href="https://kotlinlang.org/docs/reference/equality.html#structural-equality">structural equality</a> can be checked simply with the <code>==</code> operator (no need to use <code>equals()</code>)</li>
+<li><a href="https://kotlinlang.org/docs/reference/equality.html#referential-equality">referential equality</a> can be checked with the <code>===</code> operator</li>
+<li>
+<p>creating <a href="https://kotlinlang.org/docs/reference/ranges.html">ranges</a> is supported natively</p>
+<pre><code class="hljs language-koltin">for (i in 1..10 step 2) println(i)</code></pre>
+</li>
+<li>predefined <a href="https://kotlinlang.org/docs/reference/operator-overloading.html">operators can be overloaded</a> (so no crazy operators allowed but still quite powerful)</li>
+<li>all <a href="https://kotlinlang.org/docs/reference/exceptions.html">exceptions</a> are unchecked (no more forced exception handling)</li>
+<li>
+<p><code>try</code> is an expression</p>
+<pre><code class="hljs language-koltin">val a: Int? = try { parseInt(input) } catch (e: NumberFormatException) { null }</code></pre>
+</li>
+<li>
+<p><a href="https://kotlinlang.org/docs/reference/type-safe-builders.html">type-safe builders</a> help creating rich DSLs</p>
+<pre><code class="hljs language-koltin">html {
+  head {
+     title {+"HTML built with Kotlin"}
+  }
+  // ...
+}</code></pre>
+</li>
+</ul>
+<p>By now I&rsquo;m sure you are overloaded with all this Kotlin knowledge, so I will stop here. I hope I was able to showcase the entire host of very powerful capabilities that Kotlin offers. By all means explore <a href="https://kotlinlang.org/docs/reference/">the language reference</a> to find out more about various language features.</p>
+<h2>Java interoperability</h2>
+<p>One of the design goals behind Kotlin has always been to stay close enough to Java to lower the barrier to adoption. Obviously, on the other hand the need to stay interoperable limits the the scope to introduce many new features into the language. I think Kotlin has managed to achieve quite a lot without breaking its ties to the Java world.</p>
+<p>Most of the <a href="https://kotlinlang.org/docs/reference/java-interop.html">interoperability</a> aspects revolve around mapping concepts or types between both languages.</p>
+<p>For instance, since Java doesn&rsquo;t offer null safety support similar to Kotlin, Java types are treated in a special way and called <a href="https://kotlinlang.org/docs/reference/java-interop.html#null-safety-and-platform-types">platform types</a>. Null checks are relaxed for such types with the risk of <code>NullPointerExceptions</code> being thrown at runtime.</p>
+<pre><code>val list = ArrayList() // non-null (constructor result)
+list.add(&quot;Item&quot;)
+val size = list.size() // non-null (primitive int)
+val item = list[0] // platform type inferred (ordinary Java object)
+
+item.substring(1) // allowed, may throw an exception if item == null
+
+val nullable: String? = item // allowed, always works
+val notNull: String = item // allowed, may fail at runtime
+</code></pre>
+<p>Similarly, Java generics are handled in a special way when types are imported to Kotlin and using Java arrays of primitives requires a workaround where specialised classes are used to represent them in Kotlin.</p>
+<p>When it comes to <a href="https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html">Kotlin classes being called from Java</a>, much of the work required to make them interoperable happens on the Kotlin side. Developers can use an range of annotations to instruct the compiler to produce code that will be usable from Java.</p>
+<h2>Tooling</h2>
+<p>One of the interesting aspects about Kotlin is that the language has been created by the company behind a popular IDE product. As one might expect IDE support (well, for Intellij IDEA at least) for Kotlin has been very much a part of working on the language itself. The result is a comprehensive <a href="https://kotlinlang.org/docs/tutorials/getting-started.html">Kotlin support in Intellij IDEA</a> on a par with that for Java. JetBrains also maintains an <a href="https://kotlinlang.org/docs/tutorials/getting-started-eclipse.html">Eclipse plugin for Kotlin</a> so this open-source IDE should also provide a good level of support.</p>
+<p>Kotlin creators have resisted the need to redefine much of the external tooling around the language. So for instance Kotlin projects can be built using Maven, Gradle or even Ant so except for the compiler plugin not much else is changing for those coming from the Java background.</p>
+<h2>Kotlin ecosystem</h2>
+<p>There is a growing community around the language so perhaps not surprisingly one can already find a good selection of open-source libraries and frameworks written in Kotlin. If you want to stick with your favourite Java framework, you don&rsquo;t have to make a full transition to Kotlin as you can use your existing framework in Kotlin without too much hassle and even mix Java and Kotlin code in a single codebase.</p>
+<p>The official Kotlin website lists several <a href="https://kotlinlang.org/docs/resources.html">tools, libraries and frameworks</a>, covering MVC/Web, HTTP client, dependency injection and text editor support among over things. Also, the <a href="https://javaby.github.io/awesome-kotlin/">Awesome Kotlin</a> GitHub website offers a great selection of resources to explore.</p>
+<h2>Summary</h2>
+<p>I believe Kotlin deserves at least a try, especially if you are coming from the Java background. The language brings a lot of good features from Scala and Groovy closer to Java, so you can benefit from the best of both worlds: the vastness of the Java ecosystem with expressiveness and productivity enhanced by constructs and features coming from other languages. If you do want to give Kotlin a go, why don&rsquo;t you <a href="http://try.kotlinlang.org/">try it online</a> first or just create a Kotlin project in your favourite IDE and start experimenting with it.</p>
+<p>Throughout this post I was covering Kotlin from the perspective of somebody coming from Java as I believe this is a primary expansion area for the new language. It&rsquo;s worth knowing that Kotlin is also targeting Android development (also Java but still on version 6) as well as (still experimental) JavaScript runtime as an alternative to the JVM. With such a wide range of applications and some great features I reckon Kotlin stands a good chance of attracting quite a few new users.</p>
+]]></description><link>https://opencredo.com/kotlin/</link><guid isPermaLink="true">https://opencredo.com/kotlin/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Rafal Gancarz]]></dc:creator><pubDate>Thu, 03 Mar 2016 06:55:00 GMT</pubDate></item><item><title><![CDATA[Kotlin для начинающих]]></title><description><![CDATA[<p>&#x423;&#x436;&#x435; &#x43D;&#x435; &#x43C;&#x430;&#x43B;&#x43E; &#x43D;&#x430;&#x448;&#x443;&#x43C;&#x435;&#x43B; Kotlin &#x432; &#x43C;&#x438;&#x440;&#x435; &#x43F;&#x440;&#x43E;&#x433;&#x440;&#x430;&#x43C;&#x43C;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x438;&#x44F;, &#x43D;&#x435; &#x43C;&#x430;&#x43B;&#x43E; &#x43F;&#x440;&#x43E;&#x444;&#x435;&#x441;&#x441;&#x438;&#x43E;&#x43D;&#x430;&#x43B;&#x44C;&#x43D;&#x44B;&#x445; &#x438;&#x43D;&#x436;&#x435;&#x43D;&#x435;&#x440;&#x43E;&#x432; &#x443;&#x436;&#x435; &#x43E;&#x431;&#x440;&#x430;&#x442;&#x438;&#x43B; &#x43D;&#x430; &#x43D;&#x435;&#x433;&#x43E; &#x432;&#x43D;&#x438;&#x43C;&#x430;&#x43D;&#x438;&#x435;, &#x43D;&#x43E; &#x442;&#x430;&#x43A;&#x436;&#x435; &#x435;&#x441;&#x442;&#x44C; &#x438; &#x442;&#x435; &#x43A;&#x43E;&#x43C;&#x443; &#x43E;&#x43D; &#x43D;&#x435; &#x441;&#x438;&#x43C;&#x43F;&#x430;&#x442;&#x438;&#x437;&#x438;&#x440;&#x443;&#x435;&#x442;.</p>
 <p><img src="https://habrastorage.org/files/a52/453/729/a52453729bd64cb3b5ca8a4892e45cc1.png" alt="Kotlin"></p>
 <p>&#x412; &#x434;&#x430;&#x43D;&#x43D;&#x43E;&#x43C; &#x442;&#x43E;&#x43F;&#x438;&#x43A;&#x435; &#x44F; &#x431;&#x44B; &#x445;&#x43E;&#x442;&#x435;&#x43B; &#x43E;&#x431;&#x440;&#x430;&#x442;&#x438;&#x442;&#x44C; &#x432;&#x43D;&#x438;&#x43C;&#x430;&#x43D;&#x438;&#x435; &#x442;&#x435;&#x445; &#x43D;&#x430;&#x447;&#x438;&#x43D;&#x430;&#x44E;&#x449;&#x438;&#x445; &#x43F;&#x440;&#x43E;&#x433;&#x440;&#x430;&#x43C;&#x43C;&#x438;&#x441;&#x442;&#x43E;&#x432; &#x43A;&#x43E;&#x442;&#x43E;&#x440;&#x44B;&#x435; &#x432;&#x43E;&#x437;&#x43C;&#x43E;&#x436;&#x43D;&#x43E; &#x442;&#x43E;&#x43B;&#x44C;&#x43A;&#x43E; &#x434;&#x435;&#x43B;&#x430;&#x44E;&#x442; &#x441;&#x432;&#x43E;&#x439; &#x432;&#x44B;&#x431;&#x43E;&#x440; &#x44F;&#x437;&#x44B;&#x43A;&#x430; &#x43F;&#x440;&#x43E;&#x433;&#x440;&#x430;&#x43C;&#x43C;&#x438;&#x440;&#x43E;&#x432;&#x430;&#x43D;&#x438;&#x44F;, &#x43A;&#x43E;&#x442;&#x43E;&#x440;&#x43E;&#x43C;&#x443; &#x431;&#x44B; &#x445;&#x43E;&#x442;&#x435;&#x43B;&#x438; &#x43F;&#x43E;&#x441;&#x432;&#x44F;&#x442;&#x438;&#x442;&#x44C; &#x441;&#x432;&#x43E;&#x44E; &#x436;&#x438;&#x437;&#x43D;&#x44C; &#x442;&#x430;&#x43A; &#x441;&#x43A;&#x430;&#x437;&#x430;&#x442;&#x44C;.</p>
 <p>&#x42F; &#x441;&#x430;&#x43C; Java Developer &#x438; &#x434;&#x43B;&#x44F; &#x43C;&#x435;&#x43D;&#x44F; &#x43D;&#x430;&#x441;&#x442;&#x443;&#x43F;&#x438;&#x43B; &#x442;&#x43E;&#x442; &#x43F;&#x435;&#x440;&#x438;&#x43E;&#x434; &#x44F; &#x43A;&#x43E;&#x433;&#x434;&#x430; &#x445;&#x43E;&#x442;&#x435;&#x43B;&#x43E;&#x441;&#x44C; &#x43F;&#x43E;&#x441;&#x43C;&#x43E;&#x442;&#x440;&#x435;&#x442;&#x44C; &#x43D;&#x430; &#x434;&#x440;&#x443;&#x433;&#x438;&#x435; &#x44F;&#x437;&#x44B;&#x43A;&#x438;, &#x432;&#x437;&#x44F;&#x442;&#x44C; &#x43A;&#x430;&#x43A;&#x438;&#x435;-&#x442;&#x43E; &#x43F;&#x440;&#x430;&#x43A;&#x442;&#x438;&#x43A;&#x438; &#x434;&#x43B;&#x44F; &#x441;&#x435;&#x431;&#x44F; &#x441; &#x43D;&#x438;&#x445;.</p>
@@ -190,7 +458,11 @@ println(a?.length())</code></pre>
 <p>I&#x27;d also proffer that it has an easier transition from Java to Kotlin than it is for Scala though I have no evidence for this other than my own experience of all 3 languages (including leading mixed skill teams in Scala and Java).</p>
 <p>You could ask &quot;but why not one of the other many languages available on the JVM?&quot; and that would be fair. Many JVM languages haven&#x27;t seen a great deal of traction or remain relatively niche but I think Kotlin is much better placed. It&#x27;s more &quot;general purpose&quot; than a lot of the alt languages which means it will map better to current practises. It&#x27;s closer to Java and/or Scala than other languages, it strikes the right balance around the type system with features like type inference and enhanced generics and it doesn&#x27;t hurt that Jetbrains; a major player in the JVM world; is heavily invested in Kotlins future.</p>
 <p>In the two years since I started playing with Kotlin it has aged well. It resisted adding a plethora of features for the sake of it and instead created a core syntax and feature set that allows developers enough wiggle room for being creative without turning them into Wizards of Arcane DSLs. This is a sweet spot for me when it comes to building and supporting a service over many years as it avoids the unnecessary pain that comes from the extreme ends of spectrum that Java and Scala tend to reside. Of course this doesn&#x27;t mean it&#x27;s perfect, nothing is. You&#x27;re still adding another language to a project and taking on the associated baggage that comes with it like tooling differences and additional upskilling. Its not suddenly going to make your organisation move the JVM if they aren&#x27;t already there. It&#x27;s also not going to fix all your problems - bad architecture will remain bad architecture and bad patterns will remain bad patterns. However, with that said, <strong>I believe Kotlin will reduce enough of the friction of general software development and maintenance on the JVM to make it worth the investment</strong>.</p>
-]]></description><link>https://yobriefca.se/blog/2016/02/24/kotlin-2-years-on/</link><guid isPermaLink="true">https://yobriefca.se/blog/2016/02/24/kotlin-2-years-on/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[James Hughes]]></dc:creator><pubDate>Tue, 23 Feb 2016 21:00:00 GMT</pubDate></item><item><title><![CDATA[An Introduction to Kotlin]]></title><description><![CDATA[<p><a href="https://kotlinlang.org/">Kotlin</a> is a relatively new language that keeps the good parts of Java while eliminating boilerplate and encouraging better Object Oriented programming style while still allowing a Functional paradigm. Best of all, it&rsquo;s 100% Java-compatible which allows you to mix it with Java, Groovy, or any other Java-bytecode language. Kotlin is similar in many ways to Groovy by handling a lot of the more mundane aspects of coding in Java but unlike Groovy, which took a Dynamic Typing approach, Kotlin doubled-down on Static typing to help eliminate many of the common annoyances in Java.</p>
+]]></description><link>https://yobriefca.se/blog/2016/02/24/kotlin-2-years-on/</link><guid isPermaLink="true">https://yobriefca.se/blog/2016/02/24/kotlin-2-years-on/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[James Hughes]]></dc:creator><pubDate>Tue, 23 Feb 2016 21:00:00 GMT</pubDate></item><item><title><![CDATA[Kotlin 1.0 is finally released!]]></title><description><![CDATA[<p>Last week, there was a wonderful announcement: (see title of post)! No more milestones, betas, or release candidates required! Obviously, release candidates for later versions will be coming out, but now you don&rsquo;t have to worry about them if you don&rsquo;t want to.</p>
+<p>If you&rsquo;re like me and were waiting until release before trying to convince company management to consider Kotlin as a development option, now is the time to speak out!</p>
+<p>In celebration of Kotlin&rsquo;s proper release, I will be doing a short series of articles describing some of my favorite things about the language. Starting this weekend with a quick overview of smaller features that I don&rsquo;t have a ton to say about. I&rsquo;m calling it Kotlin Month, and I only slightly regret that the first one will be in one month while the others are in the next month :P</p>
+<p>Also, you may notice that there&rsquo;s now a page at the top pertaining to Kotlin articles. This won&rsquo;t be much more useful than selecting the Kotlin tag from the tag cloud to the right, but it will at least stay there, even if Kotlin posts dwindle far enough to remove the tag from the cloud.</p>
+]]></description><link>https://programmingideaswithjake.wordpress.com/2016/02/22/kotlin-1-0-is-finally-released/</link><guid isPermaLink="true">https://programmingideaswithjake.wordpress.com/2016/02/22/kotlin-1-0-is-finally-released/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jacob Zimmerman]]></dc:creator><pubDate>Mon, 22 Feb 2016 23:09:00 GMT</pubDate></item><item><title><![CDATA[An Introduction to Kotlin]]></title><description><![CDATA[<p><a href="https://kotlinlang.org/">Kotlin</a> is a relatively new language that keeps the good parts of Java while eliminating boilerplate and encouraging better Object Oriented programming style while still allowing a Functional paradigm. Best of all, it&rsquo;s 100% Java-compatible which allows you to mix it with Java, Groovy, or any other Java-bytecode language. Kotlin is similar in many ways to Groovy by handling a lot of the more mundane aspects of coding in Java but unlike Groovy, which took a Dynamic Typing approach, Kotlin doubled-down on Static typing to help eliminate many of the common annoyances in Java.</p>
 <h2>Kotlin Features</h2>
 <p>While Kotlin&rsquo;s entire feature list is far too expansive to discuss in this post I would like to point out some of my favorites coming from a Java background. If you want to dive straight into some Kotlin code there is an <a href="https://github.com/mike-plummer/KotlinCalendar">example program out on GitHub</a> that demonstrates most of the features discussed below.</p>
 <h3>Null Safety and Immutability</h3>
@@ -349,11 +621,7 @@ println(stringA === stringC)    <span class="hljs-comment">// True, both referen
 <p>I&rsquo;ve coded up a simple example of using Kotlin in a standalone program <a href="https://github.com/mike-plummer/KotlinCalendar">out on GitHub</a>. This program demonstrates much of what I&rsquo;ve discussed here, including many of Kotlin&rsquo;s core features and Spek tests.</p>
 <h2>Conclusion</h2>
 <p>I hope I&rsquo;ve shown you a few reasons to get excited about Kotlin and want to use it in your next project. Especially now that version 1.0 has dropped it&rsquo;s never been a better time. Popular frameworks like Spring Boot are <a href="https://spring.io/blog/2016/02/15/developing-spring-boot-applications-with-kotlin">adding support</a> which makes it downright easy to gain the power and expressiveness of Kotlin. If you have any questions leave a comment below. If you would like to see more detail on specific Kotlin features leave that below too; if there&rsquo;s enough interest I will explore them in future posts. In the meantime, take a look at the <a href="https://github.com/mike-plummer/KotlinCalendar">example code</a> and <a href="https://kotlinlang.org/docs/">Kotlin docs</a>. Happy coding!</p>
-]]></description><link>https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</link><guid isPermaLink="true">https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Mike Plummer]]></dc:creator><pubDate>Tue, 23 Feb 2016 09:00:00 GMT</pubDate></item><item><title><![CDATA[Kotlin 1.0 is finally released!]]></title><description><![CDATA[<p>Last week, there was a wonderful announcement: (see title of post)! No more milestones, betas, or release candidates required! Obviously, release candidates for later versions will be coming out, but now you don&rsquo;t have to worry about them if you don&rsquo;t want to.</p>
-<p>If you&rsquo;re like me and were waiting until release before trying to convince company management to consider Kotlin as a development option, now is the time to speak out!</p>
-<p>In celebration of Kotlin&rsquo;s proper release, I will be doing a short series of articles describing some of my favorite things about the language. Starting this weekend with a quick overview of smaller features that I don&rsquo;t have a ton to say about. I&rsquo;m calling it Kotlin Month, and I only slightly regret that the first one will be in one month while the others are in the next month :P</p>
-<p>Also, you may notice that there&rsquo;s now a page at the top pertaining to Kotlin articles. This won&rsquo;t be much more useful than selecting the Kotlin tag from the tag cloud to the right, but it will at least stay there, even if Kotlin posts dwindle far enough to remove the tag from the cloud.</p>
-]]></description><link>https://programmingideaswithjake.wordpress.com/2016/02/22/kotlin-1-0-is-finally-released/</link><guid isPermaLink="true">https://programmingideaswithjake.wordpress.com/2016/02/22/kotlin-1-0-is-finally-released/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jacob Zimmerman]]></dc:creator><pubDate>Mon, 22 Feb 2016 23:09:00 GMT</pubDate></item><item><title><![CDATA[A Very Peculiar, but Possibly Cunning Kotlin Language Feature.]]></title><description><![CDATA[<p>This has caught me by surprise. After studying the <a href="https://kotlinlang.org/">Kotlin language</a> to learn about how to best leverage this interesting new language for <a href="http://www.jooq.org/">jOOQ</a>, I stumbled upon this puzzler. What do you think the following program will print?</p>
+]]></description><link>https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</link><guid isPermaLink="true">https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Mike Plummer]]></dc:creator><pubDate>Tue, 23 Feb 2016 09:00:00 GMT</pubDate></item><item><title><![CDATA[A Very Peculiar, but Possibly Cunning Kotlin Language Feature.]]></title><description><![CDATA[<p>This has caught me by surprise. After studying the <a href="https://kotlinlang.org/">Kotlin language</a> to learn about how to best leverage this interesting new language for <a href="http://www.jooq.org/">jOOQ</a>, I stumbled upon this puzzler. What do you think the following program will print?</p>
 <pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>)</span> {</span>
     (<span class="hljs-number">1.</span><span class="hljs-number">.5</span>).forEach {
         <span class="hljs-keyword">if</span> (it == <span class="hljs-number">3</span>)
@@ -445,33 +713,7 @@ OutputStreamWriter(r.getOutputStream()).use {
 <p>Weird. Cunning. Clever. But a bit unexpected.</p>
 <p>Is this a good idea? Or will the language designers regret this, later on? Are all lambdas / closures potentially &ldquo;language construct-ish&rdquo;, where such a return statement is expected to leave the outer scope? Or are there clear cases where this inline behaviour just makes total sense?</p>
 <p>We&rsquo;ll see. In any case, it is very interesting for a language to have chosen this path.</p>
-]]></description><link>http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</link><guid isPermaLink="true">http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Puzzlers]]></category><dc:creator><![CDATA[Lukas Eder]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:33:00 GMT</pubDate></item><item><title><![CDATA[More Kotlin Features to Love]]></title><description><![CDATA[<p>Constants are important
-One of the things that I&rsquo;ve come to appreciate more and more as a programmer are constants. Before I would have yawned and said big deal why? Now I&rsquo;d say they are so important as they prevent so many needless bugs. If we are guaranteed that something is not null then we can focus simply on getting our work done instead having to null check the world.</p>
-<p>that is gnarly
-In Java we used the final keyword to create a constant. Unfortunately the gnarly requirement for using the final keyword is that you must either declare the value inline or set it in the constructor. I&rsquo;ve run into a fair number of cases where I want something to be final, but don&rsquo;t know it yet, worse is when it belongs in a class but will not be available until after that class has been constructed and had one of it&rsquo;s methods executed. Fortunately Kotlin allows us to have constants declared that aren&rsquo;t required to be set during the constructor. We can use the lazy keyword:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> myConstant</span> : String by Lazy{
-     calculateConstant();
-}</code></pre>
-<p>This allows us to have a constant that is instantiated the first time myConstant is used. This is perfect for two reasons:</p>
-<ol>
-<li>We don&rsquo;t need to do this calculation in the constructor(which is bad anyways as it violates SOLID principles by having logic in the constructor other than variable assignment)</li>
-<li>The result of the Lazy calculation is cached, and will not be run in subsequent requests(good for expensive calculations)</li>
-</ol>
-<h2>Sort of Ternary Operator</h2>
-<p>While Kotlin doesn&rsquo;t have a true Ternary Operator it does have an operator that comes close that I had not noticed before:</p>
-<pre><code class="hljs language-kotlin">println(listOfStrings?.size ?: <span class="hljs-string">"empty"</span>) <span class="hljs-comment">// will first check if the strings is not null and print the size, or empty if it is null</span></code></pre>
-<h2>Kotlin is concise</h2>
-<p>The common theme I keep coming back to with Kotlin is that the language allows use to concisely write code. For example in Java if we wanted to execute a block of code if a null check was passed we&rsquo;d do this:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">object</span> != <span class="hljs-literal">null</span>) {
-     <span class="hljs-comment">// do some action with object</span>
-}</code></pre>
-<p>but in Kotlin we can be more concise and do the following:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-keyword">object</span>?.let {
-    <span class="hljs-comment">// if object is not null execute what is in the curly braces</span>
-}</code></pre>
-<p>It&rsquo;s a much simpler syntax for doing the same thing</p>
-<p><img src="http://i.giphy.com/UnQ68p0AVulkQ.gif" alt="Kotlin is concise"></p>
-]]></description><link>http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</link><guid isPermaLink="true">http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jim Baca]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:44:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: Easily storing a list in SharedPreferences with Custom Accessors]]></title><description><![CDATA[<p>SharedPreferences is at its core a simple tool with a deceptively verbose interface that weighs heavily on developer productivity. Kotlin on its own will not necessarily make Java-interfacing code pretty and concise, but you can apply a few particular concepts to create an elegant, downright easy-to-use solution to a common use-case:</p>
+]]></description><link>http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</link><guid isPermaLink="true">http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Puzzlers]]></category><dc:creator><![CDATA[Lukas Eder]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:33:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: Easily storing a list in SharedPreferences with Custom Accessors]]></title><description><![CDATA[<p>SharedPreferences is at its core a simple tool with a deceptively verbose interface that weighs heavily on developer productivity. Kotlin on its own will not necessarily make Java-interfacing code pretty and concise, but you can apply a few particular concepts to create an elegant, downright easy-to-use solution to a common use-case:</p>
 <p><strong>Storing a list of strings that will persist across app sessions.</strong></p>
 <p>You can write code as if you have a regular old stored List<String> property, with the additional benefit that it is always in sync with SharedPreferences (*):</p>
 <pre><code class="hljs language-kotlin"><span class="hljs-comment">// Adding to a list</span>
@@ -512,7 +754,33 @@ syncingSongIds -= song.id <span class="hljs-comment">// and remove the song id f
 <p><strong>NB: This will only work for very simple strings. If you want to extend this functionality to be more powerful and accept any string or object type</strong>, try using Google GSON or another JSON serialization library (JSONObject from the Android SDK is perfectly workable, if quirky) and replacing <code>raw.split(&quot;,&quot;)</code> and <code>value.joinToString(&quot;,&quot;)</code> with a JSON -&gt; Object, and Object -&gt; JSON conversion respectively.</p>
 <p><strong>NB: Because we call <code>apply()</code> in the setter rather than <code>commit</code>, this code is relatively safe to call on the main thread but it does NOT have immediate consistency</strong>. That is, if you call <code>syncingSongIds += &quot;asdf&quot;; print(syncingSongIds)</code> it may not include &ldquo;asdf&rdquo; in the printout. <strong>To fix this, change <code>apply()</code> to <code>commit()</code>, but beware of incurring additional overhead</strong> as the setter now has to write to disk synchronously every time it is called. It is your decision as to whether or not to call the setter on the main thread; I think it is relatively safe when done sparingly, but I would certainly keep an eye on that particular setter and make sure it doesn&rsquo;t adversely impact performance in your app noticeably.</p>
 <p>* I&rsquo;m not making any synchronicity guarantees&ndash;maybe as a part two, but ultimately if your code is not thread-safe, you should still modify and test these code snippets to fit your synchronicity needs.</p>
-]]></description><link>http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</link><guid isPermaLink="true">http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Dennis Lysenko]]></dc:creator><pubDate>Mon, 22 Feb 2016 09:36:00 GMT</pubDate></item><item><title><![CDATA[Kotlin — Love at first line]]></title><description><![CDATA[<h2>Kotlin&#x200A;&mdash;&#x200A;Love at first line</h2>
+]]></description><link>http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</link><guid isPermaLink="true">http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Dennis Lysenko]]></dc:creator><pubDate>Mon, 22 Feb 2016 09:36:00 GMT</pubDate></item><item><title><![CDATA[More Kotlin Features to Love]]></title><description><![CDATA[<p>Constants are important
+One of the things that I&rsquo;ve come to appreciate more and more as a programmer are constants. Before I would have yawned and said big deal why? Now I&rsquo;d say they are so important as they prevent so many needless bugs. If we are guaranteed that something is not null then we can focus simply on getting our work done instead having to null check the world.</p>
+<p>that is gnarly
+In Java we used the final keyword to create a constant. Unfortunately the gnarly requirement for using the final keyword is that you must either declare the value inline or set it in the constructor. I&rsquo;ve run into a fair number of cases where I want something to be final, but don&rsquo;t know it yet, worse is when it belongs in a class but will not be available until after that class has been constructed and had one of it&rsquo;s methods executed. Fortunately Kotlin allows us to have constants declared that aren&rsquo;t required to be set during the constructor. We can use the lazy keyword:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> myConstant</span> : String by Lazy{
+     calculateConstant();
+}</code></pre>
+<p>This allows us to have a constant that is instantiated the first time myConstant is used. This is perfect for two reasons:</p>
+<ol>
+<li>We don&rsquo;t need to do this calculation in the constructor(which is bad anyways as it violates SOLID principles by having logic in the constructor other than variable assignment)</li>
+<li>The result of the Lazy calculation is cached, and will not be run in subsequent requests(good for expensive calculations)</li>
+</ol>
+<h2>Sort of Ternary Operator</h2>
+<p>While Kotlin doesn&rsquo;t have a true Ternary Operator it does have an operator that comes close that I had not noticed before:</p>
+<pre><code class="hljs language-kotlin">println(listOfStrings?.size ?: <span class="hljs-string">"empty"</span>) <span class="hljs-comment">// will first check if the strings is not null and print the size, or empty if it is null</span></code></pre>
+<h2>Kotlin is concise</h2>
+<p>The common theme I keep coming back to with Kotlin is that the language allows use to concisely write code. For example in Java if we wanted to execute a block of code if a null check was passed we&rsquo;d do this:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">object</span> != <span class="hljs-literal">null</span>) {
+     <span class="hljs-comment">// do some action with object</span>
+}</code></pre>
+<p>but in Kotlin we can be more concise and do the following:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">object</span>?.let {
+    <span class="hljs-comment">// if object is not null execute what is in the curly braces</span>
+}</code></pre>
+<p>It&rsquo;s a much simpler syntax for doing the same thing</p>
+<p><img src="http://i.giphy.com/UnQ68p0AVulkQ.gif" alt="Kotlin is concise"></p>
+]]></description><link>http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</link><guid isPermaLink="true">http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jim Baca]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:44:00 GMT</pubDate></item><item><title><![CDATA[Kotlin — Love at first line]]></title><description><![CDATA[<h2>Kotlin&#x200A;&mdash;&#x200A;Love at first line</h2>
 <p>Kotlin 1.0 has been <a href="https://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/">released</a>
 a few days ago and it&rsquo;s time to check out its awesome features.</p>
 <p>For those of you who might have been living under a rock and don&rsquo;t know what Kotlin is&#x200A;&mdash;&#x200A;Kotlin is a new JVM programming language that tries to &ldquo;fill in the gaps&rdquo; that Java has. It&rsquo;s 100% interoperable with Java&#x200A;&mdash;&#x200A;meaning that you can have a mixed project that contains Kotlin &amp; Java classes. The classes are compiled to Java bytecode, and that bytecode is &ldquo;runnable&rdquo; on Java6+, which makes it runnable on Android.</p>
