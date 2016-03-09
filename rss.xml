@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Sun, 06 Mar 2016 07:18:13 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 06 Mar 2016 07:18:13 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[Kotlin Month Post 2: Inheritance and Defaults]]></title><description><![CDATA[<h2>Intro</h2>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Wed, 09 Mar 2016 09:35:47 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 09 Mar 2016 09:35:47 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[Solving the Josephus problem in Kotlin]]></title><description><![CDATA[<p>I recently stumbled upon a <a href="http://www.danvk.org/josephus.html">post</a> telling about the <a href="https://en.wikipedia.org/wiki/Josephus_problem">Josephus problem</a> and trying to solve it in different scripting languages. For the sake of brevity, here&rsquo;s the problem (taken from the referenced post):</p>
+<blockquote>
+<p>Flavius Josephus was a roman historian of Jewish origin. During the Jewish-Roman wars of the first century AD, he was in a cave with fellow soldiers, 40 men in all, surrounded by enemy Roman troops. They decided to commit suicide by standing in a ring and counting off each third man. Each man so designated was to commit suicide&hellip;Josephus, not wanting to die, managed to place himself in the position of the last survivor.</p>
+</blockquote>
+<blockquote>
+<p>In the general version of the problem, there are n soldiers numbered from 1 to n and each k-th soldier will be eliminated. The count starts from the first soldier. What is the number of the last survivor?</p>
+</blockquote>
+<p>It seemed like a good challenge to test my building Kotlin skills. Here&rsquo;s the solution I&rsquo;ve come up with. First, the test class, using TestNG and a data provider &ndash; it&rsquo;s the perfect use-case:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JosephusTest</span> </span>{
+
+    @DataProvider
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">data</span><span class="hljs-params">()</span>: Array<span class="hljs-type">&lt;Array&lt;Int&gt;</span>&gt; {</span>
+        <span class="hljs-keyword">return</span> arrayOf(
+                arrayOf(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>),
+                arrayOf(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>),
+                arrayOf(<span class="hljs-number">10</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>),
+                arrayOf(<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>),
+                arrayOf(<span class="hljs-number">4</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>)
+        )
+    }
+
+    @Test(dataProvider = <span class="hljs-string">"data"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">circle_of_size_and_step_should_survive_position</span><span class="hljs-params">(size: <span class="hljs-type">Int, step: Int, expectedPosition: Int</span>)</span> {</span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> circle</span> = Circle(size, step)
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> survivor</span> = circle.findSurvivor()
+        assertEquals(survivor.position, expectedPosition)
+    }
+}</code></pre>
+<p>Now, the code:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Soldier</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> position</span>: <span class="hljs-keyword">Int</span>) {
+    <span class="hljs-variable"><span class="hljs-keyword">var</span> state</span> = State.Living
+    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> next</span>: Soldier
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">suicide</span><span class="hljs-params">()</span> {</span>
+        state = State.Dead
+    }
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isDead</span><span class="hljs-params">()</span> = state == State.Dead</span>
+}
+
+<span class="hljs-keyword">enum</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">State</span> </span>{
+    Living, Dead
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Circle</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> size</span>: <span class="hljs-keyword">Int</span>, <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> step</span>: <span class="hljs-keyword">Int</span>) {
+
+    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> first</span> = Soldier(<span class="hljs-number">0</span>)
+
+    init {
+        <span class="hljs-variable"><span class="hljs-keyword">var</span> person</span> = first
+        <span class="hljs-keyword">while</span> (person.position <span class="hljs-type">&lt; size - 1) {
+            person = createNext(person)
+        }
+        val last = person
+        last.next = first
+    }
+
+    private fun createNext(soldier: Soldier): Soldier {
+        val new = Soldier(soldier.position + 1)
+        soldier.next = new
+        return new
+    }
+
+    fun findSurvivor(): Soldier {
+        var soldier: Soldier = first
+        var numberOfDead = 0
+        while (numberOfDead &lt; size - 1) {
+            var count: Int = 0
+            while (count &lt; step) {
+                soldier = nextLivingSoldier(soldier)
+                count++
+            }
+            soldier.suicide()
+            numberOfDead++
+        }
+        return nextLivingSoldier(soldier)
+    }
+
+    private fun nextLivingSoldier(soldier: Soldier): Soldier {
+        var currentSoldier = soldier.next
+        while (currentSoldier.isDead()) {
+            currentSoldier = currentSoldier.next
+        }
+        return currentSoldier
+    }
+}</span></code></pre>
+<p>This code works fine and the tests are successful.</p>
+<p>However, while trying to code the solution, I realized that there were no data-structure implementing circular linked lists neither in Java nor in Kotlin. I had thus to implement my own circular data-structure, but without implementing common collection features.</p>
+<p>Now, my problem with the above code is that while the <code>Soldier</code> class looks fine by me, the <code>Circle</code> class doesn&rsquo;t. There are too many vars in <code>Circle</code> and it feels too much like imperative programming. The lack of <code>for(;;)</code> in Kotlin forces me to use a <code>while</code> with an outside variable &ndash; twice: <code>count</code> and <code>numberOfDead</code>.</p>
+<p>I&rsquo;ve been thinking that I could improve the situation by changing the data-structure. I just don&rsquo;t know how... Now, Kotlin and FP gurus, do you have any proposal?</p>
+]]></description><link>https://blog.frankel.ch/solving-the-josephus-problem-in-kotlin</link><guid isPermaLink="true">https://blog.frankel.ch/solving-the-josephus-problem-in-kotlin</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Nicolas Franke]]></dc:creator><pubDate>Sun, 06 Mar 2016 13:00:00 GMT</pubDate></item><item><title><![CDATA[Kotlin Month Post 2: Inheritance and Defaults]]></title><description><![CDATA[<h2>Intro</h2>
 <p>Continuing on with <a href="https://programmingideaswithjake.wordpress.com/kotlin/#kotlinmonth">Kotlin Month</a>, this week, I&rsquo;ll be discussing topics in Kotlin that have to do with inheritance and default values.</p>
 <h2>Composition Over Inheritance</h2>
 <p>Kotlin has put in a feature and a couple defaults that help developers keep the principle of Composition Over Inheritance at the forefront of their mind. The first of these is a feature that lets you composition almost as easily as inheritance when it comes to defining wrapper classes.</p>
@@ -713,7 +801,33 @@ OutputStreamWriter(r.getOutputStream()).use {
 <p>Weird. Cunning. Clever. But a bit unexpected.</p>
 <p>Is this a good idea? Or will the language designers regret this, later on? Are all lambdas / closures potentially &ldquo;language construct-ish&rdquo;, where such a return statement is expected to leave the outer scope? Or are there clear cases where this inline behaviour just makes total sense?</p>
 <p>We&rsquo;ll see. In any case, it is very interesting for a language to have chosen this path.</p>
-]]></description><link>http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</link><guid isPermaLink="true">http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Puzzlers]]></category><dc:creator><![CDATA[Lukas Eder]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:33:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: Easily storing a list in SharedPreferences with Custom Accessors]]></title><description><![CDATA[<p>SharedPreferences is at its core a simple tool with a deceptively verbose interface that weighs heavily on developer productivity. Kotlin on its own will not necessarily make Java-interfacing code pretty and concise, but you can apply a few particular concepts to create an elegant, downright easy-to-use solution to a common use-case:</p>
+]]></description><link>http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</link><guid isPermaLink="true">http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Puzzlers]]></category><dc:creator><![CDATA[Lukas Eder]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:33:00 GMT</pubDate></item><item><title><![CDATA[More Kotlin Features to Love]]></title><description><![CDATA[<p>Constants are important
+One of the things that I&rsquo;ve come to appreciate more and more as a programmer are constants. Before I would have yawned and said big deal why? Now I&rsquo;d say they are so important as they prevent so many needless bugs. If we are guaranteed that something is not null then we can focus simply on getting our work done instead having to null check the world.</p>
+<p>that is gnarly
+In Java we used the final keyword to create a constant. Unfortunately the gnarly requirement for using the final keyword is that you must either declare the value inline or set it in the constructor. I&rsquo;ve run into a fair number of cases where I want something to be final, but don&rsquo;t know it yet, worse is when it belongs in a class but will not be available until after that class has been constructed and had one of it&rsquo;s methods executed. Fortunately Kotlin allows us to have constants declared that aren&rsquo;t required to be set during the constructor. We can use the lazy keyword:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> myConstant</span> : String by Lazy{
+     calculateConstant();
+}</code></pre>
+<p>This allows us to have a constant that is instantiated the first time myConstant is used. This is perfect for two reasons:</p>
+<ol>
+<li>We don&rsquo;t need to do this calculation in the constructor(which is bad anyways as it violates SOLID principles by having logic in the constructor other than variable assignment)</li>
+<li>The result of the Lazy calculation is cached, and will not be run in subsequent requests(good for expensive calculations)</li>
+</ol>
+<h2>Sort of Ternary Operator</h2>
+<p>While Kotlin doesn&rsquo;t have a true Ternary Operator it does have an operator that comes close that I had not noticed before:</p>
+<pre><code class="hljs language-kotlin">println(listOfStrings?.size ?: <span class="hljs-string">"empty"</span>) <span class="hljs-comment">// will first check if the strings is not null and print the size, or empty if it is null</span></code></pre>
+<h2>Kotlin is concise</h2>
+<p>The common theme I keep coming back to with Kotlin is that the language allows use to concisely write code. For example in Java if we wanted to execute a block of code if a null check was passed we&rsquo;d do this:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">object</span> != <span class="hljs-literal">null</span>) {
+     <span class="hljs-comment">// do some action with object</span>
+}</code></pre>
+<p>but in Kotlin we can be more concise and do the following:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">object</span>?.let {
+    <span class="hljs-comment">// if object is not null execute what is in the curly braces</span>
+}</code></pre>
+<p>It&rsquo;s a much simpler syntax for doing the same thing</p>
+<p><img src="http://i.giphy.com/UnQ68p0AVulkQ.gif" alt="Kotlin is concise"></p>
+]]></description><link>http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</link><guid isPermaLink="true">http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jim Baca]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:44:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: Easily storing a list in SharedPreferences with Custom Accessors]]></title><description><![CDATA[<p>SharedPreferences is at its core a simple tool with a deceptively verbose interface that weighs heavily on developer productivity. Kotlin on its own will not necessarily make Java-interfacing code pretty and concise, but you can apply a few particular concepts to create an elegant, downright easy-to-use solution to a common use-case:</p>
 <p><strong>Storing a list of strings that will persist across app sessions.</strong></p>
 <p>You can write code as if you have a regular old stored List<String> property, with the additional benefit that it is always in sync with SharedPreferences (*):</p>
 <pre><code class="hljs language-kotlin"><span class="hljs-comment">// Adding to a list</span>
@@ -754,33 +868,7 @@ syncingSongIds -= song.id <span class="hljs-comment">// and remove the song id f
 <p><strong>NB: This will only work for very simple strings. If you want to extend this functionality to be more powerful and accept any string or object type</strong>, try using Google GSON or another JSON serialization library (JSONObject from the Android SDK is perfectly workable, if quirky) and replacing <code>raw.split(&quot;,&quot;)</code> and <code>value.joinToString(&quot;,&quot;)</code> with a JSON -&gt; Object, and Object -&gt; JSON conversion respectively.</p>
 <p><strong>NB: Because we call <code>apply()</code> in the setter rather than <code>commit</code>, this code is relatively safe to call on the main thread but it does NOT have immediate consistency</strong>. That is, if you call <code>syncingSongIds += &quot;asdf&quot;; print(syncingSongIds)</code> it may not include &ldquo;asdf&rdquo; in the printout. <strong>To fix this, change <code>apply()</code> to <code>commit()</code>, but beware of incurring additional overhead</strong> as the setter now has to write to disk synchronously every time it is called. It is your decision as to whether or not to call the setter on the main thread; I think it is relatively safe when done sparingly, but I would certainly keep an eye on that particular setter and make sure it doesn&rsquo;t adversely impact performance in your app noticeably.</p>
 <p>* I&rsquo;m not making any synchronicity guarantees&ndash;maybe as a part two, but ultimately if your code is not thread-safe, you should still modify and test these code snippets to fit your synchronicity needs.</p>
-]]></description><link>http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</link><guid isPermaLink="true">http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Dennis Lysenko]]></dc:creator><pubDate>Mon, 22 Feb 2016 09:36:00 GMT</pubDate></item><item><title><![CDATA[More Kotlin Features to Love]]></title><description><![CDATA[<p>Constants are important
-One of the things that I&rsquo;ve come to appreciate more and more as a programmer are constants. Before I would have yawned and said big deal why? Now I&rsquo;d say they are so important as they prevent so many needless bugs. If we are guaranteed that something is not null then we can focus simply on getting our work done instead having to null check the world.</p>
-<p>that is gnarly
-In Java we used the final keyword to create a constant. Unfortunately the gnarly requirement for using the final keyword is that you must either declare the value inline or set it in the constructor. I&rsquo;ve run into a fair number of cases where I want something to be final, but don&rsquo;t know it yet, worse is when it belongs in a class but will not be available until after that class has been constructed and had one of it&rsquo;s methods executed. Fortunately Kotlin allows us to have constants declared that aren&rsquo;t required to be set during the constructor. We can use the lazy keyword:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> myConstant</span> : String by Lazy{
-     calculateConstant();
-}</code></pre>
-<p>This allows us to have a constant that is instantiated the first time myConstant is used. This is perfect for two reasons:</p>
-<ol>
-<li>We don&rsquo;t need to do this calculation in the constructor(which is bad anyways as it violates SOLID principles by having logic in the constructor other than variable assignment)</li>
-<li>The result of the Lazy calculation is cached, and will not be run in subsequent requests(good for expensive calculations)</li>
-</ol>
-<h2>Sort of Ternary Operator</h2>
-<p>While Kotlin doesn&rsquo;t have a true Ternary Operator it does have an operator that comes close that I had not noticed before:</p>
-<pre><code class="hljs language-kotlin">println(listOfStrings?.size ?: <span class="hljs-string">"empty"</span>) <span class="hljs-comment">// will first check if the strings is not null and print the size, or empty if it is null</span></code></pre>
-<h2>Kotlin is concise</h2>
-<p>The common theme I keep coming back to with Kotlin is that the language allows use to concisely write code. For example in Java if we wanted to execute a block of code if a null check was passed we&rsquo;d do this:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">object</span> != <span class="hljs-literal">null</span>) {
-     <span class="hljs-comment">// do some action with object</span>
-}</code></pre>
-<p>but in Kotlin we can be more concise and do the following:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-keyword">object</span>?.let {
-    <span class="hljs-comment">// if object is not null execute what is in the curly braces</span>
-}</code></pre>
-<p>It&rsquo;s a much simpler syntax for doing the same thing</p>
-<p><img src="http://i.giphy.com/UnQ68p0AVulkQ.gif" alt="Kotlin is concise"></p>
-]]></description><link>http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</link><guid isPermaLink="true">http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jim Baca]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:44:00 GMT</pubDate></item><item><title><![CDATA[Kotlin — Love at first line]]></title><description><![CDATA[<h2>Kotlin&#x200A;&mdash;&#x200A;Love at first line</h2>
+]]></description><link>http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</link><guid isPermaLink="true">http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Dennis Lysenko]]></dc:creator><pubDate>Mon, 22 Feb 2016 09:36:00 GMT</pubDate></item><item><title><![CDATA[Kotlin — Love at first line]]></title><description><![CDATA[<h2>Kotlin&#x200A;&mdash;&#x200A;Love at first line</h2>
 <p>Kotlin 1.0 has been <a href="https://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/">released</a>
 a few days ago and it&rsquo;s time to check out its awesome features.</p>
 <p>For those of you who might have been living under a rock and don&rsquo;t know what Kotlin is&#x200A;&mdash;&#x200A;Kotlin is a new JVM programming language that tries to &ldquo;fill in the gaps&rdquo; that Java has. It&rsquo;s 100% interoperable with Java&#x200A;&mdash;&#x200A;meaning that you can have a mixed project that contains Kotlin &amp; Java classes. The classes are compiled to Java bytecode, and that bytecode is &ldquo;runnable&rdquo; on Java6+, which makes it runnable on Android.</p>
