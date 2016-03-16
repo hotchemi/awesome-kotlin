@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Wed, 09 Mar 2016 12:29:48 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 09 Mar 2016 12:29:48 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[Solving the Josephus problem in Kotlin]]></title><description><![CDATA[<p>I recently stumbled upon a <a href="http://www.danvk.org/josephus.html">post</a> telling about the <a href="https://en.wikipedia.org/wiki/Josephus_problem">Josephus problem</a> and trying to solve it in different scripting languages. For the sake of brevity, here&rsquo;s the problem (taken from the referenced post):</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Wed, 16 Mar 2016 23:03:25 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 16 Mar 2016 23:03:24 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[Solving the Josephus problem in Kotlin]]></title><description><![CDATA[<p>I recently stumbled upon a <a href="http://www.danvk.org/josephus.html">post</a> telling about the <a href="https://en.wikipedia.org/wiki/Josephus_problem">Josephus problem</a> and trying to solve it in different scripting languages. For the sake of brevity, here&rsquo;s the problem (taken from the referenced post):</p>
 <blockquote>
 <p>Flavius Josephus was a roman historian of Jewish origin. During the Jewish-Roman wars of the first century AD, he was in a cave with fellow soldiers, 40 men in all, surrounded by enemy Roman troops. They decided to commit suicide by standing in a ring and counting off each third man. Each man so designated was to commit suicide&hellip;Josephus, not wanting to die, managed to place himself in the position of the last survivor.</p>
 </blockquote>
@@ -143,7 +143,159 @@
 <h2>&#x427;&#x430;&#x441;&#x442;&#x44C; 4. &#x421;&#x435;&#x441;&#x441;&#x438;&#x44F; &#x432;&#x43E;&#x43F;&#x440;&#x43E;&#x441;&#x43E;&#x432; &#x438; &#x43E;&#x442;&#x432;&#x435;&#x442;&#x43E;&#x432;</h2>
 <p><a href="https://www.youtube.com/watch?v=YOmdOTlhZa8">&#x410;&#x43D;&#x434;&#x440;&#x435;&#x439; &#x411;&#x440;&#x435;&#x441;&#x43B;&#x430;&#x432; &#x438; &#x414;&#x43C;&#x438;&#x442;&#x440;&#x438;&#x439; &#x416;&#x435;&#x43C;&#x435;&#x440;&#x43E;&#x432; &mdash; Kotlin - &#x441;&#x435;&#x441;&#x441;&#x438;&#x44F; &#x432;&#x43E;&#x43F;&#x440;&#x43E;&#x441;&#x43E;&#x432; &#x438; &#x43E;&#x442;&#x432;&#x435;&#x442;&#x43E;&#x432;</a>
 &#x410;&#x43D;&#x434;&#x440;&#x435;&#x439;, &#x414;&#x43C;&#x438;&#x442;&#x440;&#x438;&#x439; &#x438; &#x434;&#x440;&#x443;&#x433;&#x438;&#x435; &#x440;&#x430;&#x437;&#x440;&#x430;&#x431;&#x43E;&#x442;&#x447;&#x438;&#x43A;&#x438; Kotlin &#x441; &#x443;&#x434;&#x43E;&#x432;&#x43E;&#x43B;&#x44C;&#x441;&#x442;&#x432;&#x438;&#x435;&#x43C; &#x43E;&#x442;&#x432;&#x435;&#x442;&#x44F;&#x442; &#x43D;&#x430; &#x432;&#x430;&#x448;&#x438; &#x432;&#x43E;&#x43F;&#x440;&#x43E;&#x441;&#x44B;.</p>
-]]></description><link>https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</link><guid isPermaLink="true">https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Video]]></category><dc:creator><![CDATA[JetBrains]]></dc:creator><pubDate>Fri, 04 Mar 2016 14:12:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: a new JVM language you should try]]></title><description><![CDATA[<h2>Kotlin 1.0 is here</h2>
+]]></description><link>https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</link><guid isPermaLink="true">https://github.com/JavaBy/awesome-kotlin/blob/master/app/rss/articles/%5BRU%5D%20%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D1%81%D0%BE%20%D0%B2%D1%81%D1%82%D1%80%D0%B5%D1%87%D0%B8%20JUG.ru%20%D1%81%20%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0%D0%BC%D0%B8%20Kotlin.md</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Video]]></category><dc:creator><![CDATA[JetBrains]]></dc:creator><pubDate>Fri, 04 Mar 2016 14:12:00 GMT</pubDate></item><item><title><![CDATA[Building a Kotlin project 1/2]]></title><description><![CDATA[<h3>Part 1</h3>
+<p>The best way to learn a new language is to use it in a real use case.
+That&#x27;s way this new series of posts are focused on building a proper Android project using Kotlin.</p>
+<h2>Scenario</h2>
+<p>To cover as many scenarios as possible the project will require:</p>
+<ul>
+<li>Accessing to the network</li>
+<li>Retrieving data through out a REST API call</li>
+<li>Deserialize data</li>
+<li>Showing Images in a list</li>
+</ul>
+<p>For this purpose why not have an app showing kittens? ;)
+Using the <a href="http://thecatapi.com/">http://thecatapi.com/</a> API we can retrieve several funny cat images</p>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xkittenApp.png.pagespeed.ic.ulo4yWl6Cg.png" alt="Example"></p>
+<h2>Dependencies</h2>
+<p>It looks like a very good chance to try out some very cool libraries like</p>
+<ul>
+<li><a href="http://square.github.io/retrofit/">Retrofit2</a> for the network access, REST API calls and deserializing data</li>
+<li><a href="https://github.com/bumptech/glide">Glide</a> for showing images</li>
+<li><a href="https://github.com/ReactiveX/RxJava">RxJava</a> to bind data</li>
+<li><a href="http://developer.android.com/training/material/lists-cards.html">RecyclerView CardView</a> as UI</li>
+<li>Everything wrapped in a <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter">MVP</a> pattern</li>
+</ul>
+<h2>Set Up the Project</h2>
+<p>Using <a href="http://developer.android.com/sdk/index.html">Android Studio</a> is extremely simple create a new project from scratch</p>
+<h3>Start a new Android Project</h3>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject.png.pagespeed.ic.7fDR0qSTJd.png" alt="Start a new Android Project"></p>
+<h3>Create a new project</h3>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Create_NEW-1.png.pagespeed.ic.rtJ-FIVYiG.png" alt="Create a new project"></p>
+<h3>Select Target Android Device</h3>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Target.png.pagespeed.ic.bXlb6fWH62.png" alt="Select Target Android Device"></p>
+<h3>Add an activity</h3>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Empty.png.pagespeed.ic.VYxIdhZ3Xk.png" alt="Add an activity"></p>
+<h3>Customize the Activity</h3>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xAndroidStudio_NewProject_Activity.png.pagespeed.ic.3g2X5Gs9Bn.png" alt="Customize the Activity"></p>
+<p>Press on Finish, the new project from the chosen template will be created.</p>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xAndroidStudio_Basic_Template.png.pagespeed.ic.3iX8nv51PP.png" alt="Done"></p>
+<p>This is the starting point of our Kitten App!
+However the code is still in Java, later we&rsquo;re going to see how to convert it.</p>
+<h2>Defining Gradle Build Tool</h2>
+<p>The next step is to adjust the Build Tool and defining which libraries we&#x27;re going to use for the project.</p>
+<blockquote>
+<p>Before starting with this phase, have a look at what you need for an Android Kotlin project on this <a href="http://www.cirorizzo.net/kotlin-code/">post</a></p>
+</blockquote>
+<p>Open the Module App <code>build.gradle</code> (highlighted with a red rectangle in the picture)</p>
+<p><img src="http://cirorizzo.net/content/images/2016/03/xAndroidStudio_Basic_Gradle_High.png.pagespeed.ic.0SHrJn4YZc.png" alt="Gradle"></p>
+<p>It&#x27;s a very good practice collecting all the libraries&#x27; version and Android properties in separate scripts and accessing to them through the <code>ext</code> property object provided by Gradle.</p>
+<p>The easiest way is to add at the beginning of the <code>build.gradle</code> file the following snippet</p>
+<pre><code class="hljs language-groovy">buildscript {
+  ext.compileSdkVersion_ver = <span class="hljs-number">23</span>
+  ext.buildToolsVersion_ver = <span class="hljs-string">'23.0.2'</span>
+
+  ext.minSdkVersion_ver = <span class="hljs-number">21</span>
+  ext.targetSdkVersion_ver = <span class="hljs-number">23</span>
+  ext.versionCode_ver = <span class="hljs-number">1</span>
+  ext.versionName_ver = <span class="hljs-string">'1.0'</span>
+
+  ext.support_ver = <span class="hljs-string">'23.1.1'</span>
+
+  ext.kotlin_ver = <span class="hljs-string">'1.0.0'</span>
+  ext.anko_ver = <span class="hljs-string">'0.8.2'</span>
+
+  ext.glide_ver = <span class="hljs-string">'3.7.0'</span>
+  ext.retrofit_ver = <span class="hljs-string">'2.0.0-beta4'</span>
+  ext.rxjava_ver = <span class="hljs-string">'1.1.1'</span>
+  ext.rxandroid_ver = <span class="hljs-string">'1.1.0'</span>
+
+  ext.junit_ver = <span class="hljs-string">'4.12'</span>
+
+  repositories {
+      mavenCentral()
+  }
+
+  dependencies {
+      classpath <span class="hljs-string">"org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_ver"</span>
+  }
+}</code></pre>
+<p>Then adding the Kotlin plugins as shown</p>
+<pre><code class="hljs language-groovy">apply <span class="hljs-string">plugin:</span> <span class="hljs-string">'com.android.application'</span>
+apply <span class="hljs-string">plugin:</span> <span class="hljs-string">'kotlin-android'</span>
+apply <span class="hljs-string">plugin:</span> <span class="hljs-string">'kotlin-android-extensions'</span></code></pre>
+<p>Before adding the dependencies for the libraries we&#x27;re going to use in the project starting to change all the version numbers of the script with the <code>ext</code> properties added early at the beginning of the file</p>
+<pre><code class="hljs language-groovy">android {
+  compileSdkVersion <span class="hljs-string">"$compileSdkVersion_ver"</span>.toInteger()
+  buildToolsVersion <span class="hljs-string">"$buildToolsVersion_ver"</span>
+
+  defaultConfig {
+    applicationId <span class="hljs-string">"com.github.cirorizzo.kshows"</span>
+    minSdkVersion <span class="hljs-string">"$minSdkVersion_ver"</span>.toInteger()
+    targetSdkVersion <span class="hljs-string">"$targetSdkVersion_ver"</span>.toInteger()
+    versionCode <span class="hljs-string">"$versionCode_ver"</span>.toInteger()
+    versionName <span class="hljs-string">"$versionName_ver"</span>
+}
+...</code></pre>
+<p>One more change to the <code>builTypes</code> section</p>
+<pre><code class="hljs language-groovy">buildTypes {
+    debug {
+        buildConfigField(<span class="hljs-string">"int"</span>, <span class="hljs-string">"MAX_IMAGES_PER_REQUEST"</span>, <span class="hljs-string">"10"</span>)
+        debuggable <span class="hljs-literal">true</span>
+        minifyEnabled <span class="hljs-literal">false</span>
+        proguardFiles getDefaultProguardFile(<span class="hljs-string">'proguard-android.txt'</span>), <span class="hljs-string">'proguard-rules.pro'</span>
+    }
+
+    release {
+        buildConfigField(<span class="hljs-string">"int"</span>, <span class="hljs-string">"MAX_IMAGES_PER_REQUEST"</span>, <span class="hljs-string">"500"</span>)
+        debuggable <span class="hljs-literal">false</span>
+        minifyEnabled <span class="hljs-literal">true</span>
+        shrinkResources <span class="hljs-literal">true</span>
+        proguardFiles getDefaultProguardFile(<span class="hljs-string">'proguard-android.txt'</span>), <span class="hljs-string">'proguard-rules.pro'</span>
+    }
+}
+sourceSets {
+    main.java.srcDirs += <span class="hljs-string">'src/main/kotlin'</span>
+}</code></pre>
+<p>Next step is to declare the Libraries used in the project</p>
+<pre><code class="hljs language-groovy">dependencies {
+  compile fileTree(<span class="hljs-string">dir:</span> <span class="hljs-string">'libs'</span>, <span class="hljs-string">include:</span> [<span class="hljs-string">'*.jar'</span>])
+  testCompile <span class="hljs-string">"junit:junit:$junit_ver"</span>
+
+  compile <span class="hljs-string">"com.android.support:appcompat-v7:$support_ver"</span>
+  compile <span class="hljs-string">"com.android.support:cardview-v7:$support_ver"</span>
+  compile <span class="hljs-string">"com.android.support:recyclerview-v7:$support_ver"</span>
+  compile <span class="hljs-string">"com.github.bumptech.glide:glide:$glide_ver"</span>
+
+  compile <span class="hljs-string">"com.squareup.retrofit2:retrofit:$retrofit_ver"</span>
+  compile (<span class="hljs-string">"com.squareup.retrofit2:converter-simplexml:$retrofit_ver"</span>) {
+    exclude <span class="hljs-string">module:</span> <span class="hljs-string">'xpp3'</span>
+    exclude <span class="hljs-string">group:</span> <span class="hljs-string">'stax'</span>
+}
+
+  compile <span class="hljs-string">"io.reactivex:rxjava:$rxjava_ver"</span>
+  compile <span class="hljs-string">"io.reactivex:rxandroid:$rxandroid_ver"</span>
+  compile <span class="hljs-string">"com.squareup.retrofit2:adapter-rxjava:$retrofit_ver"</span>
+
+  compile <span class="hljs-string">"org.jetbrains.kotlin:kotlin-stdlib:$kotlin_ver"</span>
+  compile <span class="hljs-string">"org.jetbrains.anko:anko-common:$anko_ver"</span>
+}</code></pre>
+<p>Finally the <code>build.gradle</code> is ready to work with the project.</p>
+<p>Just one more thing is to add the <code>uses-permission</code> to access to Internet, so add the following line to the <code>AndroidManifest.xml</code></p>
+<pre><code class="hljs language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.INTERNET"</span> /&gt;</span></code></pre>
+<p>And now we are ready to go to the next step</p>
+<h2>Designing Project Structure</h2>
+<p>Another good practice is to structure the project having different packages and folders for different group of Classes composing our project so we can structure our project as shown below.</p>
+<p><img src="data:image/png;base64,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" alt="Structure"></p>
+<blockquote>
+<p>Right Click on the Root Package <code>com.github.cirorizzo.kshows</code> and then <code>New -&gt; Package</code></p>
+</blockquote>
+<h2>Coding</h2>
+<p>The next <a href="http://www.cirorizzo.net/2016/03/04/building-a-kotlin-project-2/">post</a> is on how to code the elements of the Kitten app</p>
+<h2>Translations</h2>
+<p>This post is also available in Chinese on <a href="https://goo.gl/tBIMn7">gold.xitu.io</a>
+A special thanks for the translation to the gold.xitu.io Team</p>
+]]></description><link>http://cirorizzo.net/2016/03/04/building-a-kotlin-project/</link><guid isPermaLink="true">http://cirorizzo.net/2016/03/04/building-a-kotlin-project/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Ciro Rizzo]]></dc:creator><pubDate>Fri, 04 Mar 2016 18:19:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: a new JVM language you should try]]></title><description><![CDATA[<h2>Kotlin 1.0 is here</h2>
 <p><a href="https://www.jetbrains.com/">JetBrains</a> (the people behind IntelliJ IDEA) have <a href="http://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/">recently announced</a> the first RC for version 1.0 of <a href="https://kotlinlang.org/">Kotlin</a>, a new programming language for the JVM. I say &lsquo;new&rsquo;, but Kotlin has been in the making for a few years now, and has been used by JetBrains to develop several of their products, including Intellij IDEA. The company <a href="https://github.com/JetBrains/kotlin">open-sourced</a> Kotlin in 2011, and have worked with the community since then to make the language what it is today.</p>
 <p><img src="https://opencredo.com/wp-content/uploads/2016/02/kronshtadt.jpg" alt="Kotlin"></p>
 <h2>What is Kotlin and why you should care</h2>
@@ -380,7 +532,53 @@ val notNull: String = item // allowed, may fail at runtime
 <a href="https://www.youtube.com/watch?v=frw1DpNm_ms">https://www.youtube.com/watch?v=frw1DpNm_ms</a></p>
 <p>&#x41F;&#x43E;&#x43A;&#x430; &#x43F;&#x43B;&#x430;&#x43D;&#x438;&#x440;&#x443;&#x44E; &#x432;&#x44B;&#x43A;&#x43B;&#x430;&#x434;&#x44B;&#x432;&#x430;&#x442;&#x44C; &#x434;&#x432;&#x430; &#x432;&#x438;&#x434;&#x435;&#x43E; &#x432; &#x43D;&#x435;&#x434;&#x435;&#x43B;&#x44E;, &#x432;&#x435;&#x441;&#x44C; &#x441;&#x43F;&#x438;&#x441;&#x43E;&#x43A; &#x431;&#x443;&#x434;&#x435;&#x442; <a href="https://goo.gl/yegW0d">&#x442;&#x443;&#x442;</a>.
 &#x421;&#x43F;&#x430;&#x441;&#x438;&#x431;&#x43E; &#x437;&#x430; &#x432;&#x430;&#x448;&#x435; &#x432;&#x43D;&#x438;&#x43C;&#x430;&#x43D;&#x438;&#x435;, &#x438; &#x43D;&#x430;&#x434;&#x435;&#x44E;&#x441;&#x44C;, &#x434;&#x430;&#x43D;&#x43D;&#x430;&#x44F; &#x438;&#x43D;&#x444;&#x43E;&#x440;&#x43C;&#x430;&#x446;&#x438;&#x44F; &#x43A;&#x43E;&#x43C;&#x443;-&#x442;&#x43E; &#x431;&#x443;&#x434;&#x435;&#x442; &#x43F;&#x43E;&#x43B;&#x435;&#x437;&#x43D;&#x43E;!</p>
-]]></description><link>https://habrahabr.ru/post/278277/</link><guid isPermaLink="true">https://habrahabr.ru/post/278277/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[@Devcolibri]]></dc:creator><pubDate>Wed, 02 Mar 2016 12:18:00 GMT</pubDate></item><item><title><![CDATA[Developing on Android sucks a lot less with Kotlin]]></title><description><![CDATA[<p><img src="https://wiredcraft.com/images/posts/Android-app-development-Kotlin.jpg" alt="Kotlin"></p>
+]]></description><link>https://habrahabr.ru/post/278277/</link><guid isPermaLink="true">https://habrahabr.ru/post/278277/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[@Devcolibri]]></dc:creator><pubDate>Wed, 02 Mar 2016 12:18:00 GMT</pubDate></item><item><title><![CDATA[Kotlin & Android: A Brass Tacks Experiment, Part 5]]></title><description><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/800/1*UN-S8ELMC2kpHf4tJKfbLQ.png" alt="Header Picture"></p>
+<p><em>Disclaimer: I am a Google employee, but the views expressed in this article are not those of my employer.</em></p>
+<h2>Kotlin &amp; Android: A Brass Tacks Experiment, Part 5</h2>
+<p>Well, we&rsquo;ve made it to part 5 in an ongoing weekly blog about my experiences using the Kotlin&reg; language to do useful things for Android development. If you&rsquo;ve landed here randomly or unexpectedly, perhaps you&rsquo;d like to jump to one of the prior parts first and catch up to where we are now?</p>
+<p><a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-1-3e5028491bcc">Part 1</a> (setup) | <a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-2-c67661cfdf5f">Part 2</a> (code starts here) | <a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-3-84e65d567a37">Part 3</a> | <a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-4-4b7b501fa457">Part 4</a></p>
+<p>At this point, we have a pretty good way of expressing the creation of an Android view hierarchy with fewer keystrokes than the equivalent XML resource, and <em>far</em> fewer than the equivalent written purely in the Java&reg; language. Its syntax is declarative, the nesting of views is obvious, and we know how to use Kotlin <em>extension functions</em> to add convenient utility functions as needed.</p>
+<p>But we left things last time with an awkward situation while trying to set a view&rsquo;s left padding. Here&rsquo;s what it looks like currently to set padding. Note that we have to call setPadding() with its four arguments instead of assigning to a <em>synthetic property</em> that&rsquo;s derived from JavaBeans-style getters and setters:</p>
+<pre><code class="hljs language-kotlin">v<span class="hljs-type">&lt;TextView&gt;</span> {
+    layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+    setPadding(dp_i(<span class="hljs-number">16</span>), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment">// bleh - it's not consistent</span>
+    text = <span class="hljs-string">"Hello"</span>
+}</code></pre>
+<p>To be consistent in this view builder code, we would rather specify the left padding directly by assignment instead of calling a method with four parameters. At first blush, you might consider using another extension function to attach an extension method called &ldquo;setLeftPadding(int)&rdquo; to the View class. You could do this, but then you wouldn&rsquo;t actually be able to refer to it as &ldquo;leftPadding = dp_i(16)&rdquo; in the <em>lambda with receiver</em>. It turns out that member functions that look like JavaBeans-style accessors that are <em>defined in Kotlin</em> don&rsquo;t get automatically converted into synthetic properties like member methods <em>defined in Java classes</em>. Bummer... but not really!</p>
+<p>Instead, Kotlin also allows you to define <em>extension properties</em>, which allow a syntax that looks just like the synthetic properties for Java class methods that we&rsquo;ve been using so far. An extension property is grafted onto an existing class just like a Kotlin extension method so you can access them on instances of that class, assuming the extension property is imported into your code.</p>
+<p>So what we can do is define extension properties to set padding values in a way that&rsquo;s consistent with the other synthetic properties of view. I&rsquo;ll just show a single property here for left padding; the others follow suit:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">var</span> View.padLeft</span>: <span class="hljs-keyword">Int</span>
+    <span class="hljs-comment">// Specify the setter behavior; value is the assigned Int</span>
+    <span class="hljs-keyword">set</span>(value) {
+        <span class="hljs-comment">// Use View.setPadding to set left padding value,</span>
+        <span class="hljs-comment">// uses Kotlin synthetic properties for the others</span>
+        setPadding(value, paddingTop, paddingRight, paddingBottom)
+    }
+    <span class="hljs-comment">// Specify the getter behavior</span>
+    <span class="hljs-keyword">get</span>() {
+        <span class="hljs-keyword">return</span> paddingLeft
+    }</code></pre>
+<p>Using this &ldquo;padLeft&rdquo; extension property, our earlier TextView creation can now be written like this:</p>
+<pre><code class="hljs language-kotlin">v<span class="hljs-type">&lt;TextView&gt;</span> {
+    layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+    padLeft = dp_i(<span class="hljs-number">16</span>)  <span class="hljs-comment">// ahhh - much better!</span>
+    text = <span class="hljs-string">"Hello"</span>
+}</code></pre>
+<p>Consistency in assignment for all the properties. Excellent!</p>
+<p>There&rsquo;s a few things to note about the padLeft extension property:</p>
+<ul>
+<li>It uses a syntax similar to the &ldquo;class dot function&rdquo; notation for extension functions, but now it&rsquo;s &ldquo;class dot property&rdquo;.</li>
+<li>The property type is given after the colon.</li>
+<li>It&rsquo;s declared using &ldquo;var&rdquo;, which is Kotlin&rsquo;s way of saying a variable or property is <em>mutable</em>. This means we can assign values directly to it. (On the other hand, &ldquo;val&rdquo; properties are <em>immutable</em> and can only be read.)</li>
+<li>An extension property that&rsquo;s mutable requires us to provide both a getter and setter implementation. (Likewise, an immutable property requires only a getter).</li>
+</ul>
+<p>The implementation of the padLeft <em>setter</em> is defined in terms the existing setPadding() method of View. It takes the value provided from the right hand side of the assignment expression and uses that as the first parameter to setPadding(), along with the values of synthetic properties for the other existing padding values of the TextView. Below the setter, the implementation of the padLeft <em>getter</em> is simply defined using the View&rsquo;s existing &ldquo;paddingLeft&rdquo; synthetic property.</p>
+<p>Side note: I find it somewhat ironic that Android&rsquo;s View class provides JavaBeans-style <em>getters</em> for each directional padding metric but <em>not setters</em>. Oh well, we fixed it with extension properties!</p>
+<p>If you ever need more from a class API that you don&rsquo;t control, just add what you want with Kotlin&rsquo;s extension functions and properties. &#x1F603;</p>
+<h2>Any other Kotlin tricks to share?</h2>
+<p>There a couple more simple tricks that can be used to tighten up the syntax even more. One trick allows you to get rid of all references to &ldquo;v&rdquo; in your view builder expressions, and another will make it easier to specify complicated layout parameters. So check in next time to see how these work!</p>
+<p>As usual, you can follow me <a href="https://medium.com/@CodingDoug">here on Medium</a> and also <a href="https://twitter.com/CodingDoug">on Twitter as CodingDoug</a> to get notified of the next part to this series. I hope you&rsquo;ve found it useful for learning Kotlin language features as well as learning some new things about Android views.</p>
+]]></description><link>https://medium.com/@CodingDoug/kotlin-android-a-brass-tacks-experiment-part-5-bd79eb9c85d4#.tyblv8pv8</link><guid isPermaLink="true">https://medium.com/@CodingDoug/kotlin-android-a-brass-tacks-experiment-part-5-bd79eb9c85d4#.tyblv8pv8</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Android]]></category><dc:creator><![CDATA[Doug Stevenson]]></dc:creator><pubDate>Tue, 01 Mar 2016 19:14:00 GMT</pubDate></item><item><title><![CDATA[Developing on Android sucks a lot less with Kotlin]]></title><description><![CDATA[<p><img src="https://wiredcraft.com/images/posts/Android-app-development-Kotlin.jpg" alt="Kotlin"></p>
 <p>While Android development has improved tremendously in the past few years, many think that it still sucks when compared to iOS. A lot of folks are working hard to make it better, maybe even enjoyable. And <a href="https://kotlinlang.org/">Kotlin</a>, a new programming language, seems to be headed in that direction. Having been brought onboard by Starbucks in China to work on their mobile apps, we&#x27;ve been experimenting with Kotlin as a viable option to improving the UX of the Android app and making it overall more maintainable.</p>
 <h2>What is Kotlin?</h2>
 <p><a href="https://kotlinlang.org/">Kotlin</a> is a new language from the guys at JetBrain, the team behind Intellij, Android Studio, and some of the best IDE in the industry. Essentially, Kotlin is an evolution of the Java syntax. Its source code can be compiled to JVM bytecode and it has 100% interoperability with Java. JetBrain even recently added the ability to compile Kotlin code to JavaScript, potentially broadening its reach.</p>
@@ -447,53 +645,7 @@ println(a?.length())</code></pre>
 <p>Kotlin probably isn&#x27;t as hot in the Android community as Swift is for the iOS world, but the number of libraries is growing. Being interoperable with Java 6 and backed up by JetBrain should put you at ease with investing in it; it will be around for a long time.</p>
 <p>Kotlin fixed a lot of the issues we had with developing for Android. There&#x27;s still room for improvement, but I encourage all of you out there who shared the frustrations of building Android apps to give it a try on your next project.</p>
 <p>And finally, if you&#x27;re looking for a rock-solid team of nerds and creatives in NYC, Berlin, or Shanghai to work on your next Android or iOS project, <a href="http://twitter.com/wiredcraft">reach out on Twitter</a> or shoot us an email either <a href="https://wiredcraft.typeform.com/to/GG4GQz">on our site</a> or at <a href="mailto:info@wiredcraft.com">info@wiredcraft.com</a>.</p>
-]]></description><link>https://wiredcraft.com/blog/android-apps-development-kotlin/</link><guid isPermaLink="true">https://wiredcraft.com/blog/android-apps-development-kotlin/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Kuno Qing]]></dc:creator><pubDate>Mon, 29 Feb 2016 21:00:00 GMT</pubDate></item><item><title><![CDATA[Kotlin & Android: A Brass Tacks Experiment, Part 5]]></title><description><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/800/1*UN-S8ELMC2kpHf4tJKfbLQ.png" alt="Header Picture"></p>
-<p><em>Disclaimer: I am a Google employee, but the views expressed in this article are not those of my employer.</em></p>
-<h2>Kotlin &amp; Android: A Brass Tacks Experiment, Part 5</h2>
-<p>Well, we&rsquo;ve made it to part 5 in an ongoing weekly blog about my experiences using the Kotlin&reg; language to do useful things for Android development. If you&rsquo;ve landed here randomly or unexpectedly, perhaps you&rsquo;d like to jump to one of the prior parts first and catch up to where we are now?</p>
-<p><a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-1-3e5028491bcc">Part 1</a> (setup) | <a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-2-c67661cfdf5f">Part 2</a> (code starts here) | <a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-3-84e65d567a37">Part 3</a> | <a href="https://medium.com/p/kotlin-android-a-brass-tacks-experiment-part-4-4b7b501fa457">Part 4</a></p>
-<p>At this point, we have a pretty good way of expressing the creation of an Android view hierarchy with fewer keystrokes than the equivalent XML resource, and <em>far</em> fewer than the equivalent written purely in the Java&reg; language. Its syntax is declarative, the nesting of views is obvious, and we know how to use Kotlin <em>extension functions</em> to add convenient utility functions as needed.</p>
-<p>But we left things last time with an awkward situation while trying to set a view&rsquo;s left padding. Here&rsquo;s what it looks like currently to set padding. Note that we have to call setPadding() with its four arguments instead of assigning to a <em>synthetic property</em> that&rsquo;s derived from JavaBeans-style getters and setters:</p>
-<pre><code class="hljs language-kotlin">v<span class="hljs-type">&lt;TextView&gt;</span> {
-    layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-    setPadding(dp_i(<span class="hljs-number">16</span>), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)  <span class="hljs-comment">// bleh - it's not consistent</span>
-    text = <span class="hljs-string">"Hello"</span>
-}</code></pre>
-<p>To be consistent in this view builder code, we would rather specify the left padding directly by assignment instead of calling a method with four parameters. At first blush, you might consider using another extension function to attach an extension method called &ldquo;setLeftPadding(int)&rdquo; to the View class. You could do this, but then you wouldn&rsquo;t actually be able to refer to it as &ldquo;leftPadding = dp_i(16)&rdquo; in the <em>lambda with receiver</em>. It turns out that member functions that look like JavaBeans-style accessors that are <em>defined in Kotlin</em> don&rsquo;t get automatically converted into synthetic properties like member methods <em>defined in Java classes</em>. Bummer... but not really!</p>
-<p>Instead, Kotlin also allows you to define <em>extension properties</em>, which allow a syntax that looks just like the synthetic properties for Java class methods that we&rsquo;ve been using so far. An extension property is grafted onto an existing class just like a Kotlin extension method so you can access them on instances of that class, assuming the extension property is imported into your code.</p>
-<p>So what we can do is define extension properties to set padding values in a way that&rsquo;s consistent with the other synthetic properties of view. I&rsquo;ll just show a single property here for left padding; the others follow suit:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">var</span> View.padLeft</span>: <span class="hljs-keyword">Int</span>
-    <span class="hljs-comment">// Specify the setter behavior; value is the assigned Int</span>
-    <span class="hljs-keyword">set</span>(value) {
-        <span class="hljs-comment">// Use View.setPadding to set left padding value,</span>
-        <span class="hljs-comment">// uses Kotlin synthetic properties for the others</span>
-        setPadding(value, paddingTop, paddingRight, paddingBottom)
-    }
-    <span class="hljs-comment">// Specify the getter behavior</span>
-    <span class="hljs-keyword">get</span>() {
-        <span class="hljs-keyword">return</span> paddingLeft
-    }</code></pre>
-<p>Using this &ldquo;padLeft&rdquo; extension property, our earlier TextView creation can now be written like this:</p>
-<pre><code class="hljs language-kotlin">v<span class="hljs-type">&lt;TextView&gt;</span> {
-    layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-    padLeft = dp_i(<span class="hljs-number">16</span>)  <span class="hljs-comment">// ahhh - much better!</span>
-    text = <span class="hljs-string">"Hello"</span>
-}</code></pre>
-<p>Consistency in assignment for all the properties. Excellent!</p>
-<p>There&rsquo;s a few things to note about the padLeft extension property:</p>
-<ul>
-<li>It uses a syntax similar to the &ldquo;class dot function&rdquo; notation for extension functions, but now it&rsquo;s &ldquo;class dot property&rdquo;.</li>
-<li>The property type is given after the colon.</li>
-<li>It&rsquo;s declared using &ldquo;var&rdquo;, which is Kotlin&rsquo;s way of saying a variable or property is <em>mutable</em>. This means we can assign values directly to it. (On the other hand, &ldquo;val&rdquo; properties are <em>immutable</em> and can only be read.)</li>
-<li>An extension property that&rsquo;s mutable requires us to provide both a getter and setter implementation. (Likewise, an immutable property requires only a getter).</li>
-</ul>
-<p>The implementation of the padLeft <em>setter</em> is defined in terms the existing setPadding() method of View. It takes the value provided from the right hand side of the assignment expression and uses that as the first parameter to setPadding(), along with the values of synthetic properties for the other existing padding values of the TextView. Below the setter, the implementation of the padLeft <em>getter</em> is simply defined using the View&rsquo;s existing &ldquo;paddingLeft&rdquo; synthetic property.</p>
-<p>Side note: I find it somewhat ironic that Android&rsquo;s View class provides JavaBeans-style <em>getters</em> for each directional padding metric but <em>not setters</em>. Oh well, we fixed it with extension properties!</p>
-<p>If you ever need more from a class API that you don&rsquo;t control, just add what you want with Kotlin&rsquo;s extension functions and properties. &#x1F603;</p>
-<h2>Any other Kotlin tricks to share?</h2>
-<p>There a couple more simple tricks that can be used to tighten up the syntax even more. One trick allows you to get rid of all references to &ldquo;v&rdquo; in your view builder expressions, and another will make it easier to specify complicated layout parameters. So check in next time to see how these work!</p>
-<p>As usual, you can follow me <a href="https://medium.com/@CodingDoug">here on Medium</a> and also <a href="https://twitter.com/CodingDoug">on Twitter as CodingDoug</a> to get notified of the next part to this series. I hope you&rsquo;ve found it useful for learning Kotlin language features as well as learning some new things about Android views.</p>
-]]></description><link>https://medium.com/@CodingDoug/kotlin-android-a-brass-tacks-experiment-part-5-bd79eb9c85d4#.tyblv8pv8</link><guid isPermaLink="true">https://medium.com/@CodingDoug/kotlin-android-a-brass-tacks-experiment-part-5-bd79eb9c85d4#.tyblv8pv8</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Android]]></category><dc:creator><![CDATA[Doug Stevenson]]></dc:creator><pubDate>Tue, 01 Mar 2016 19:14:00 GMT</pubDate></item><item><title><![CDATA[Kotlin and Ceylon]]></title><description><![CDATA[<p>I recently got a chance to dive into two interesting JVM languages, Kotlin (1.0) and Ceylon (1.2.1). They&rsquo;re both attempts at being better Javas. My thoughts and observations in no particular order:</p>
+]]></description><link>https://wiredcraft.com/blog/android-apps-development-kotlin/</link><guid isPermaLink="true">https://wiredcraft.com/blog/android-apps-development-kotlin/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Kuno Qing]]></dc:creator><pubDate>Mon, 29 Feb 2016 21:00:00 GMT</pubDate></item><item><title><![CDATA[Kotlin and Ceylon]]></title><description><![CDATA[<p>I recently got a chance to dive into two interesting JVM languages, Kotlin (1.0) and Ceylon (1.2.1). They&rsquo;re both attempts at being better Javas. My thoughts and observations in no particular order:</p>
 <ul>
 <li>Kotlin has many commercial users already and it&rsquo;s the JVM language besides Java and Scala that people talk about at the conferences I attend.</li>
 <li>Kotlin is <em>very</em> solid. Except for an obscure type inference bug, I haven&rsquo;t encountered much in the way of bugs at all. I unfortunately hit quite a few Ceylon bugs in both the compiler and the SDK.</li>
