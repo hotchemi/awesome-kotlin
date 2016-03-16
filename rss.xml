@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Wed, 16 Mar 2016 23:03:25 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 16 Mar 2016 23:03:24 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[Solving the Josephus problem in Kotlin]]></title><description><![CDATA[<p>I recently stumbled upon a <a href="http://www.danvk.org/josephus.html">post</a> telling about the <a href="https://en.wikipedia.org/wiki/Josephus_problem">Josephus problem</a> and trying to solve it in different scripting languages. For the sake of brevity, here&rsquo;s the problem (taken from the referenced post):</p>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kotlin Programming Language]]></title><description><![CDATA[News, blog posts, projects, podcasts, videos and other. All information about Kotlin.]]></description><link>http://kotlin.link/</link><image><url>http://kotlin.link/favicon.ico</url><title>Kotlin Programming Language</title><link>http://kotlin.link/</link></image><generator>node-rss</generator><lastBuildDate>Wed, 16 Mar 2016 23:28:37 GMT</lastBuildDate><atom:link href="http://kotlin.link/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Wed, 16 Mar 2016 23:28:36 GMT</pubDate><copyright><![CDATA[CC0 1.0 Universal (CC0 1.0)]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></managingEditor><webMaster><![CDATA[ruslan@ibragimov.by (Ruslan Ibragimov)]]></webMaster><docs>https://validator.w3.org/feed/docs/rss2.html</docs><ttl>30</ttl><category><![CDATA[Kotlin]]></category><category><![CDATA[Programming]]></category><category><![CDATA[JVM]]></category><item><title><![CDATA[Kotlin 1.0.1 is Here!]]></title><description><![CDATA[<p>It&rsquo;s been a month since we released Kotlin 1.0, and while our user base roughly doubled during this time, we prepared the first bugfix update.</p>
+<p>Kotlin 1.0.1 starts a series of 1.0.X versions delivering safe bug fixes and performance improvements to the language (as well as other parts of the project), and new features to our tools and integrations. This time it&rsquo;s only relatively small IDE features, but bigger things are on the horizon for 1.0.2 and later.</p>
+<h2>Changes in 1.0.1</h2>
+<p>Please find the full change log <a href="https://github.com/JetBrains/kotlin/blob/1.0.1/Changelog.md">here</a>. Some numbers and highlights:</p>
+<ul>
+<li>it&rsquo;s 47 fixes in the compiler, library and Gradle plugin improvements (performance),</li>
+<li>Compatibility with Gradle 2.12,</li>
+<li>IDE features:</li>
+<li><li>Compatibility with IDEA 2016,</li></li>
+<li><li>Kotlin Education Plugin (for IDEA 2016),</li></li>
+<li><li><a href="https://youtrack.jetbrains.com/issue/KT-9752">KT-9752</a> More usable file chooser for &ldquo;Move declaration to another file&rdquo;,</li></li>
+<li><li><a href="https://youtrack.jetbrains.com/issue/KT-9697">KT-9697</a> Move method to companion object and back,</li></li>
+<li>and 39 assorted fixes in the IDE.</li>
+</ul>
+<p>We thank the participants of the EAP who tried the preview builds and reported feedback. Please join the <a href="https://discuss.kotlinlang.org/t/kotlin-1-0-1-eap/1525">EAP</a> and let&rsquo;s make Kotlin better together!</p>
+]]></description><link>http://blog.jetbrains.com/kotlin/2016/03/kotlin-1-0-1-is-here/</link><guid isPermaLink="true">http://blog.jetbrains.com/kotlin/2016/03/kotlin-1-0-1-is-here/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Release]]></category><dc:creator><![CDATA[Andrey Breslav]]></dc:creator><pubDate>Wed, 16 Mar 2016 16:54:00 GMT</pubDate></item><item><title><![CDATA[Solving the Josephus problem in Kotlin]]></title><description><![CDATA[<p>I recently stumbled upon a <a href="http://www.danvk.org/josephus.html">post</a> telling about the <a href="https://en.wikipedia.org/wiki/Josephus_problem">Josephus problem</a> and trying to solve it in different scripting languages. For the sake of brevity, here&rsquo;s the problem (taken from the referenced post):</p>
 <blockquote>
 <p>Flavius Josephus was a roman historian of Jewish origin. During the Jewish-Roman wars of the first century AD, he was in a cave with fellow soldiers, 40 men in all, surrounded by enemy Roman troops. They decided to commit suicide by standing in a ring and counting off each third man. Each man so designated was to commit suicide&hellip;Josephus, not wanting to die, managed to place himself in the position of the last survivor.</p>
 </blockquote>
@@ -861,7 +876,74 @@ println(stringA === stringC)    <span class="hljs-comment">// True, both referen
 <p>I&rsquo;ve coded up a simple example of using Kotlin in a standalone program <a href="https://github.com/mike-plummer/KotlinCalendar">out on GitHub</a>. This program demonstrates much of what I&rsquo;ve discussed here, including many of Kotlin&rsquo;s core features and Spek tests.</p>
 <h2>Conclusion</h2>
 <p>I hope I&rsquo;ve shown you a few reasons to get excited about Kotlin and want to use it in your next project. Especially now that version 1.0 has dropped it&rsquo;s never been a better time. Popular frameworks like Spring Boot are <a href="https://spring.io/blog/2016/02/15/developing-spring-boot-applications-with-kotlin">adding support</a> which makes it downright easy to gain the power and expressiveness of Kotlin. If you have any questions leave a comment below. If you would like to see more detail on specific Kotlin features leave that below too; if there&rsquo;s enough interest I will explore them in future posts. In the meantime, take a look at the <a href="https://github.com/mike-plummer/KotlinCalendar">example code</a> and <a href="https://kotlinlang.org/docs/">Kotlin docs</a>. Happy coding!</p>
-]]></description><link>https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</link><guid isPermaLink="true">https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Mike Plummer]]></dc:creator><pubDate>Tue, 23 Feb 2016 09:00:00 GMT</pubDate></item><item><title><![CDATA[A Very Peculiar, but Possibly Cunning Kotlin Language Feature.]]></title><description><![CDATA[<p>This has caught me by surprise. After studying the <a href="https://kotlinlang.org/">Kotlin language</a> to learn about how to best leverage this interesting new language for <a href="http://www.jooq.org/">jOOQ</a>, I stumbled upon this puzzler. What do you think the following program will print?</p>
+]]></description><link>https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</link><guid isPermaLink="true">https://objectpartners.com/2016/02/23/an-introduction-to-kotlin/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Mike Plummer]]></dc:creator><pubDate>Tue, 23 Feb 2016 09:00:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: Easily storing a list in SharedPreferences with Custom Accessors]]></title><description><![CDATA[<p>SharedPreferences is at its core a simple tool with a deceptively verbose interface that weighs heavily on developer productivity. Kotlin on its own will not necessarily make Java-interfacing code pretty and concise, but you can apply a few particular concepts to create an elegant, downright easy-to-use solution to a common use-case:</p>
+<p><strong>Storing a list of strings that will persist across app sessions.</strong></p>
+<p>You can write code as if you have a regular old stored List<String> property, with the additional benefit that it is always in sync with SharedPreferences (*):</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-comment">// Adding to a list</span>
+<span class="hljs-keyword">if</span> (syncingSongIds.indexOf(song.id) == <span class="hljs-number">-1</span>) {
+    syncingSongIds += song.id
+}
+
+<span class="hljs-comment">// Iterate through a list and do something with each element</span>
+syncingSongIds.forEach { id -&gt;
+    stopSyncing(id)
+}
+
+<span class="hljs-comment">// Best of all: subtracting from a list</span>
+<span class="hljs-variable"><span class="hljs-keyword">val</span> intent</span> = Intent(DONE_SYNCING)
+intent.putExtra(<span class="hljs-string">"song"</span>, song)
+sendBroadcast(intent) <span class="hljs-comment">// send a broadcast that we're done syncing</span>
+
+syncingSongIds -= song.id <span class="hljs-comment">// and remove the song id from the persisted list of syncing songs</span></code></pre>
+<p>If you&rsquo;re interested, read on.</p>
+<p>I&rsquo;m assuming you&rsquo;re doing this all inside an object or class with access to a <code>context</code> property.</p>
+<p>First of all, let&rsquo;s set up easy access to the SharedPreferences file we&rsquo;ll be reading/writing:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> sharedPreferences</span>: SharedPreferences by lazy {
+    <span class="hljs-comment">// Replace with your code for accessing shared preferences</span>
+    <span class="hljs-comment">// e.g. context.getSharedPreferences(SHARED_PREFERENCES_FILENAME, Context.MODE_PRIVATE)</span>
+}</code></pre>
+<p>For the uninitiated, the beauty of lazy properties (<code>by lazy</code>) is that they are initialized when you first access the property (i.e. when you first type <code>sharedPreferences</code>, it will call <code>context.getSharedPreferences(...)</code>) and stored from then on, so in this case, you will only ever call <code>context.getSharedPreferences(...)</code> once in the lifetime of your object.</p>
+<p><em>Skip this paragraph if you already know what a property without a backing field is</em>. In Java, instance variables are conventionally stored properties. In Kotlin, we get the option to provide completely custom accessors for a property without having any storage for the property. That means we can have a property called <code>count: Float</code> on a class <code>Counter</code> where the property is never actually <strong>stored</strong> on the Counter class. It&rsquo;s very useful in instances where you want to have a property that wraps data stored somewhere else (database, server) without having to copy that data into the class containing the property. So the count property on Counter might actually be stored in (i.e., &ldquo;backed by&rdquo;) a file on disk: every time you increment the counter, it writes directly to the file on disk, and every time you retrieve the counter&rsquo;s value, it reads directly from the file on disk. <em>While this particular example out of context is not a great idea as it incurs tons of I/O overhead, I feel it effectively illustrates the concept of a non-stored property</em>.</p>
+<p>We are going to create a property that reads directly from, and writes directly to, SharedPreferences, using Kotlin&rsquo;s syntax for custom accessors:</p>
+<pre><code class="hljs language-kotlin">var syncingSongIds: List
+    get() {
+        val raw = sharedPreferences.getString("syncing_song_ids", null) ?: return emptyList()
+        return raw.split(",")
+    }
+    set(value) {
+        sharedPreferences.edit().putString("syncing_song_idslue.joinToString(",")).apply()
+    }</code></pre>
+<p>That&rsquo;s actually all you need to do for really simple strings that are guaranteed not to have commas in them.</p>
+<p><strong>NB: This will only work for very simple strings. If you want to extend this functionality to be more powerful and accept any string or object type</strong>, try using Google GSON or another JSON serialization library (JSONObject from the Android SDK is perfectly workable, if quirky) and replacing <code>raw.split(&quot;,&quot;)</code> and <code>value.joinToString(&quot;,&quot;)</code> with a JSON -&gt; Object, and Object -&gt; JSON conversion respectively.</p>
+<p><strong>NB: Because we call <code>apply()</code> in the setter rather than <code>commit</code>, this code is relatively safe to call on the main thread but it does NOT have immediate consistency</strong>. That is, if you call <code>syncingSongIds += &quot;asdf&quot;; print(syncingSongIds)</code> it may not include &ldquo;asdf&rdquo; in the printout. <strong>To fix this, change <code>apply()</code> to <code>commit()</code>, but beware of incurring additional overhead</strong> as the setter now has to write to disk synchronously every time it is called. It is your decision as to whether or not to call the setter on the main thread; I think it is relatively safe when done sparingly, but I would certainly keep an eye on that particular setter and make sure it doesn&rsquo;t adversely impact performance in your app noticeably.</p>
+<p>* I&rsquo;m not making any synchronicity guarantees&ndash;maybe as a part two, but ultimately if your code is not thread-safe, you should still modify and test these code snippets to fit your synchronicity needs.</p>
+]]></description><link>http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</link><guid isPermaLink="true">http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Dennis Lysenko]]></dc:creator><pubDate>Mon, 22 Feb 2016 09:36:00 GMT</pubDate></item><item><title><![CDATA[More Kotlin Features to Love]]></title><description><![CDATA[<p>Constants are important
+One of the things that I&rsquo;ve come to appreciate more and more as a programmer are constants. Before I would have yawned and said big deal why? Now I&rsquo;d say they are so important as they prevent so many needless bugs. If we are guaranteed that something is not null then we can focus simply on getting our work done instead having to null check the world.</p>
+<p>that is gnarly
+In Java we used the final keyword to create a constant. Unfortunately the gnarly requirement for using the final keyword is that you must either declare the value inline or set it in the constructor. I&rsquo;ve run into a fair number of cases where I want something to be final, but don&rsquo;t know it yet, worse is when it belongs in a class but will not be available until after that class has been constructed and had one of it&rsquo;s methods executed. Fortunately Kotlin allows us to have constants declared that aren&rsquo;t required to be set during the constructor. We can use the lazy keyword:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> myConstant</span> : String by Lazy{
+     calculateConstant();
+}</code></pre>
+<p>This allows us to have a constant that is instantiated the first time myConstant is used. This is perfect for two reasons:</p>
+<ol>
+<li>We don&rsquo;t need to do this calculation in the constructor(which is bad anyways as it violates SOLID principles by having logic in the constructor other than variable assignment)</li>
+<li>The result of the Lazy calculation is cached, and will not be run in subsequent requests(good for expensive calculations)</li>
+</ol>
+<h2>Sort of Ternary Operator</h2>
+<p>While Kotlin doesn&rsquo;t have a true Ternary Operator it does have an operator that comes close that I had not noticed before:</p>
+<pre><code class="hljs language-kotlin">println(listOfStrings?.size ?: <span class="hljs-string">"empty"</span>) <span class="hljs-comment">// will first check if the strings is not null and print the size, or empty if it is null</span></code></pre>
+<h2>Kotlin is concise</h2>
+<p>The common theme I keep coming back to with Kotlin is that the language allows use to concisely write code. For example in Java if we wanted to execute a block of code if a null check was passed we&rsquo;d do this:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">object</span> != <span class="hljs-literal">null</span>) {
+     <span class="hljs-comment">// do some action with object</span>
+}</code></pre>
+<p>but in Kotlin we can be more concise and do the following:</p>
+<pre><code class="hljs language-kotlin"><span class="hljs-keyword">object</span>?.let {
+    <span class="hljs-comment">// if object is not null execute what is in the curly braces</span>
+}</code></pre>
+<p>It&rsquo;s a much simpler syntax for doing the same thing</p>
+<p><img src="http://i.giphy.com/UnQ68p0AVulkQ.gif" alt="Kotlin is concise"></p>
+]]></description><link>http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</link><guid isPermaLink="true">http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jim Baca]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:44:00 GMT</pubDate></item><item><title><![CDATA[A Very Peculiar, but Possibly Cunning Kotlin Language Feature.]]></title><description><![CDATA[<p>This has caught me by surprise. After studying the <a href="https://kotlinlang.org/">Kotlin language</a> to learn about how to best leverage this interesting new language for <a href="http://www.jooq.org/">jOOQ</a>, I stumbled upon this puzzler. What do you think the following program will print?</p>
 <pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>)</span> {</span>
     (<span class="hljs-number">1.</span><span class="hljs-number">.5</span>).forEach {
         <span class="hljs-keyword">if</span> (it == <span class="hljs-number">3</span>)
@@ -953,74 +1035,7 @@ OutputStreamWriter(r.getOutputStream()).use {
 <p>Weird. Cunning. Clever. But a bit unexpected.</p>
 <p>Is this a good idea? Or will the language designers regret this, later on? Are all lambdas / closures potentially &ldquo;language construct-ish&rdquo;, where such a return statement is expected to leave the outer scope? Or are there clear cases where this inline behaviour just makes total sense?</p>
 <p>We&rsquo;ll see. In any case, it is very interesting for a language to have chosen this path.</p>
-]]></description><link>http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</link><guid isPermaLink="true">http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Puzzlers]]></category><dc:creator><![CDATA[Lukas Eder]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:33:00 GMT</pubDate></item><item><title><![CDATA[Kotlin: Easily storing a list in SharedPreferences with Custom Accessors]]></title><description><![CDATA[<p>SharedPreferences is at its core a simple tool with a deceptively verbose interface that weighs heavily on developer productivity. Kotlin on its own will not necessarily make Java-interfacing code pretty and concise, but you can apply a few particular concepts to create an elegant, downright easy-to-use solution to a common use-case:</p>
-<p><strong>Storing a list of strings that will persist across app sessions.</strong></p>
-<p>You can write code as if you have a regular old stored List<String> property, with the additional benefit that it is always in sync with SharedPreferences (*):</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-comment">// Adding to a list</span>
-<span class="hljs-keyword">if</span> (syncingSongIds.indexOf(song.id) == <span class="hljs-number">-1</span>) {
-    syncingSongIds += song.id
-}
-
-<span class="hljs-comment">// Iterate through a list and do something with each element</span>
-syncingSongIds.forEach { id -&gt;
-    stopSyncing(id)
-}
-
-<span class="hljs-comment">// Best of all: subtracting from a list</span>
-<span class="hljs-variable"><span class="hljs-keyword">val</span> intent</span> = Intent(DONE_SYNCING)
-intent.putExtra(<span class="hljs-string">"song"</span>, song)
-sendBroadcast(intent) <span class="hljs-comment">// send a broadcast that we're done syncing</span>
-
-syncingSongIds -= song.id <span class="hljs-comment">// and remove the song id from the persisted list of syncing songs</span></code></pre>
-<p>If you&rsquo;re interested, read on.</p>
-<p>I&rsquo;m assuming you&rsquo;re doing this all inside an object or class with access to a <code>context</code> property.</p>
-<p>First of all, let&rsquo;s set up easy access to the SharedPreferences file we&rsquo;ll be reading/writing:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> sharedPreferences</span>: SharedPreferences by lazy {
-    <span class="hljs-comment">// Replace with your code for accessing shared preferences</span>
-    <span class="hljs-comment">// e.g. context.getSharedPreferences(SHARED_PREFERENCES_FILENAME, Context.MODE_PRIVATE)</span>
-}</code></pre>
-<p>For the uninitiated, the beauty of lazy properties (<code>by lazy</code>) is that they are initialized when you first access the property (i.e. when you first type <code>sharedPreferences</code>, it will call <code>context.getSharedPreferences(...)</code>) and stored from then on, so in this case, you will only ever call <code>context.getSharedPreferences(...)</code> once in the lifetime of your object.</p>
-<p><em>Skip this paragraph if you already know what a property without a backing field is</em>. In Java, instance variables are conventionally stored properties. In Kotlin, we get the option to provide completely custom accessors for a property without having any storage for the property. That means we can have a property called <code>count: Float</code> on a class <code>Counter</code> where the property is never actually <strong>stored</strong> on the Counter class. It&rsquo;s very useful in instances where you want to have a property that wraps data stored somewhere else (database, server) without having to copy that data into the class containing the property. So the count property on Counter might actually be stored in (i.e., &ldquo;backed by&rdquo;) a file on disk: every time you increment the counter, it writes directly to the file on disk, and every time you retrieve the counter&rsquo;s value, it reads directly from the file on disk. <em>While this particular example out of context is not a great idea as it incurs tons of I/O overhead, I feel it effectively illustrates the concept of a non-stored property</em>.</p>
-<p>We are going to create a property that reads directly from, and writes directly to, SharedPreferences, using Kotlin&rsquo;s syntax for custom accessors:</p>
-<pre><code class="hljs language-kotlin">var syncingSongIds: List
-    get() {
-        val raw = sharedPreferences.getString("syncing_song_ids", null) ?: return emptyList()
-        return raw.split(",")
-    }
-    set(value) {
-        sharedPreferences.edit().putString("syncing_song_idslue.joinToString(",")).apply()
-    }</code></pre>
-<p>That&rsquo;s actually all you need to do for really simple strings that are guaranteed not to have commas in them.</p>
-<p><strong>NB: This will only work for very simple strings. If you want to extend this functionality to be more powerful and accept any string or object type</strong>, try using Google GSON or another JSON serialization library (JSONObject from the Android SDK is perfectly workable, if quirky) and replacing <code>raw.split(&quot;,&quot;)</code> and <code>value.joinToString(&quot;,&quot;)</code> with a JSON -&gt; Object, and Object -&gt; JSON conversion respectively.</p>
-<p><strong>NB: Because we call <code>apply()</code> in the setter rather than <code>commit</code>, this code is relatively safe to call on the main thread but it does NOT have immediate consistency</strong>. That is, if you call <code>syncingSongIds += &quot;asdf&quot;; print(syncingSongIds)</code> it may not include &ldquo;asdf&rdquo; in the printout. <strong>To fix this, change <code>apply()</code> to <code>commit()</code>, but beware of incurring additional overhead</strong> as the setter now has to write to disk synchronously every time it is called. It is your decision as to whether or not to call the setter on the main thread; I think it is relatively safe when done sparingly, but I would certainly keep an eye on that particular setter and make sure it doesn&rsquo;t adversely impact performance in your app noticeably.</p>
-<p>* I&rsquo;m not making any synchronicity guarantees&ndash;maybe as a part two, but ultimately if your code is not thread-safe, you should still modify and test these code snippets to fit your synchronicity needs.</p>
-]]></description><link>http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</link><guid isPermaLink="true">http://blog.dennislysenko.com/2016/01/22/kotlin-easily-storing-a-list-in-sharedpreferences-with-custom-accessors/</guid><category><![CDATA[Android]]></category><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Dennis Lysenko]]></dc:creator><pubDate>Mon, 22 Feb 2016 09:36:00 GMT</pubDate></item><item><title><![CDATA[More Kotlin Features to Love]]></title><description><![CDATA[<p>Constants are important
-One of the things that I&rsquo;ve come to appreciate more and more as a programmer are constants. Before I would have yawned and said big deal why? Now I&rsquo;d say they are so important as they prevent so many needless bugs. If we are guaranteed that something is not null then we can focus simply on getting our work done instead having to null check the world.</p>
-<p>that is gnarly
-In Java we used the final keyword to create a constant. Unfortunately the gnarly requirement for using the final keyword is that you must either declare the value inline or set it in the constructor. I&rsquo;ve run into a fair number of cases where I want something to be final, but don&rsquo;t know it yet, worse is when it belongs in a class but will not be available until after that class has been constructed and had one of it&rsquo;s methods executed. Fortunately Kotlin allows us to have constants declared that aren&rsquo;t required to be set during the constructor. We can use the lazy keyword:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> myConstant</span> : String by Lazy{
-     calculateConstant();
-}</code></pre>
-<p>This allows us to have a constant that is instantiated the first time myConstant is used. This is perfect for two reasons:</p>
-<ol>
-<li>We don&rsquo;t need to do this calculation in the constructor(which is bad anyways as it violates SOLID principles by having logic in the constructor other than variable assignment)</li>
-<li>The result of the Lazy calculation is cached, and will not be run in subsequent requests(good for expensive calculations)</li>
-</ol>
-<h2>Sort of Ternary Operator</h2>
-<p>While Kotlin doesn&rsquo;t have a true Ternary Operator it does have an operator that comes close that I had not noticed before:</p>
-<pre><code class="hljs language-kotlin">println(listOfStrings?.size ?: <span class="hljs-string">"empty"</span>) <span class="hljs-comment">// will first check if the strings is not null and print the size, or empty if it is null</span></code></pre>
-<h2>Kotlin is concise</h2>
-<p>The common theme I keep coming back to with Kotlin is that the language allows use to concisely write code. For example in Java if we wanted to execute a block of code if a null check was passed we&rsquo;d do this:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">object</span> != <span class="hljs-literal">null</span>) {
-     <span class="hljs-comment">// do some action with object</span>
-}</code></pre>
-<p>but in Kotlin we can be more concise and do the following:</p>
-<pre><code class="hljs language-kotlin"><span class="hljs-keyword">object</span>?.let {
-    <span class="hljs-comment">// if object is not null execute what is in the curly braces</span>
-}</code></pre>
-<p>It&rsquo;s a much simpler syntax for doing the same thing</p>
-<p><img src="http://i.giphy.com/UnQ68p0AVulkQ.gif" alt="Kotlin is concise"></p>
-]]></description><link>http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</link><guid isPermaLink="true">http://blog.jimbaca.com/2016/02/22/more-kotlin-features-to-love/</guid><category><![CDATA[Kotlin]]></category><dc:creator><![CDATA[Jim Baca]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:44:00 GMT</pubDate></item><item><title><![CDATA[Kotlin — Love at first line]]></title><description><![CDATA[<h2>Kotlin&#x200A;&mdash;&#x200A;Love at first line</h2>
+]]></description><link>http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</link><guid isPermaLink="true">http://blog.jooq.org/2016/02/22/a-very-peculiar-but-possibly-cunning-kotlin-language-feature/</guid><category><![CDATA[Kotlin]]></category><category><![CDATA[Puzzlers]]></category><dc:creator><![CDATA[Lukas Eder]]></dc:creator><pubDate>Mon, 22 Feb 2016 12:33:00 GMT</pubDate></item><item><title><![CDATA[Kotlin — Love at first line]]></title><description><![CDATA[<h2>Kotlin&#x200A;&mdash;&#x200A;Love at first line</h2>
 <p>Kotlin 1.0 has been <a href="https://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/">released</a>
 a few days ago and it&rsquo;s time to check out its awesome features.</p>
 <p>For those of you who might have been living under a rock and don&rsquo;t know what Kotlin is&#x200A;&mdash;&#x200A;Kotlin is a new JVM programming language that tries to &ldquo;fill in the gaps&rdquo; that Java has. It&rsquo;s 100% interoperable with Java&#x200A;&mdash;&#x200A;meaning that you can have a mixed project that contains Kotlin &amp; Java classes. The classes are compiled to Java bytecode, and that bytecode is &ldquo;runnable&rdquo; on Java6+, which makes it runnable on Android.</p>
